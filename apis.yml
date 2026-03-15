@@ -1,0 +1,13 @@
+name: Jaeger
+description: Open source, end-to-end distributed tracing system for monitoring and
+  troubleshooting microservices-based architectures
+url: https://www.jaegertracing.io/
+tags:
+- Distributed Tracing
+- Observability
+- Monitoring
+- Microservices
+created: '2025'
+modified: '2025'
+apis: []
+common: []
