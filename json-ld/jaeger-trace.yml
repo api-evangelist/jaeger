@@ -1,0 +1,163 @@
+"@context":
+  "@vocab": https://schema.jaegertracing.io/
+  jaeger: https://schema.jaegertracing.io/
+  ot: https://opentracing.io/specification/
+  otel: https://opentelemetry.io/docs/specs/otel/
+  schema: https://schema.org/
+  dcterms: http://purl.org/dc/terms/
+  prov: http://www.w3.org/ns/prov#
+  xsd: http://www.w3.org/2001/XMLSchema#
+
+  Trace:
+    "@id": jaeger:Trace
+    "@type": "@id"
+    comment: >-
+      A distributed trace representing the end-to-end path of a request
+      through a system of interconnected services.
+
+  Span:
+    "@id": jaeger:Span
+    "@type": "@id"
+    comment: >-
+      A named and timed operation representing a unit of work in a
+      distributed trace. Maps to the OpenTracing Span concept.
+
+  Process:
+    "@id": jaeger:Process
+    "@type": "@id"
+    comment: >-
+      A service instance that produces tracing spans, identified by
+      service name and runtime metadata.
+
+  DependencyLink:
+    "@id": jaeger:DependencyLink
+    "@type": "@id"
+    comment: >-
+      An observed call relationship between two services derived from
+      trace data analysis.
+
+  traceID:
+    "@id": jaeger:traceID
+    "@type": xsd:string
+    comment: >-
+      Globally unique identifier for a trace, correlating all spans
+      across services for a single request.
+    equivalentProperty: otel:TraceId
+
+  spanID:
+    "@id": jaeger:spanID
+    "@type": xsd:string
+    comment: Unique identifier for a span within a trace.
+    equivalentProperty: otel:SpanId
+
+  operationName:
+    "@id": jaeger:operationName
+    "@type": xsd:string
+    comment: >-
+      The name of the operation being traced, such as an HTTP endpoint
+      or RPC method.
+    equivalentProperty: schema:name
+
+  startTime:
+    "@id": jaeger:startTime
+    "@type": xsd:long
+    comment: >-
+      Start timestamp of the span in microseconds since Unix epoch.
+    equivalentProperty: schema:startDate
+
+  duration:
+    "@id": jaeger:duration
+    "@type": xsd:long
+    comment: Duration of the span in microseconds.
+    equivalentProperty: schema:duration
+
+  serviceName:
+    "@id": jaeger:serviceName
+    "@type": xsd:string
+    comment: >-
+      The logical name of the service that produced tracing data.
+    equivalentProperty: schema:name
+
+  tags:
+    "@id": jaeger:tags
+    "@container": "@set"
+    comment: >-
+      Key-value metadata annotations on spans and processes providing
+      contextual information about the traced operation.
+
+  logs:
+    "@id": jaeger:logs
+    "@container": "@list"
+    comment: >-
+      Timestamped structured log entries recorded during a span lifecycle.
+    equivalentProperty: prov:generated
+
+  references:
+    "@id": jaeger:references
+    "@container": "@set"
+    comment: >-
+      Causal references between spans establishing the trace directed
+      acyclic graph structure.
+
+  refType:
+    "@id": jaeger:refType
+    "@type": xsd:string
+    comment: >-
+      The type of causal relationship between spans. CHILD_OF indicates
+      a synchronous parent-child call. FOLLOWS_FROM indicates an
+      asynchronous or deferred dependency.
+
+  parent:
+    "@id": jaeger:parent
+    "@type": xsd:string
+    comment: The upstream calling service in a dependency relationship.
+    equivalentProperty: prov:wasGeneratedBy
+
+  child:
+    "@id": jaeger:child
+    "@type": xsd:string
+    comment: The downstream called service in a dependency relationship.
+    equivalentProperty: prov:used
+
+  callCount:
+    "@id": jaeger:callCount
+    "@type": xsd:integer
+    comment: >-
+      The number of observed calls between services in a dependency
+      relationship.
+
+  spans:
+    "@id": jaeger:spans
+    "@container": "@set"
+    comment: The collection of spans composing a distributed trace.
+
+  processes:
+    "@id": jaeger:processes
+    "@container": "@index"
+    comment: >-
+      Map of process identifiers to process descriptions for services
+      that produced spans in a trace.
+
+  key:
+    "@id": jaeger:key
+    "@type": xsd:string
+    comment: The attribute name in a key-value pair.
+    equivalentProperty: schema:name
+
+  value:
+    "@id": jaeger:value
+    comment: The attribute value in a key-value pair.
+    equivalentProperty: schema:value
+
+  fields:
+    "@id": jaeger:fields
+    "@container": "@set"
+    comment: Structured key-value data within a span log entry.
+
+  timestamp:
+    "@id": jaeger:timestamp
+    "@type": xsd:long
+    comment: >-
+      A timestamp in microseconds since Unix epoch, used for span logs
+      and other time-stamped events.
+    equivalentProperty: dcterms:date

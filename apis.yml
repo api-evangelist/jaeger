@@ -9,5 +9,24 @@ tags:
 - Microservices
 created: '2025'
 modified: '2025'
-apis: []
+apis:
+- name: Jaeger Query API
+  description: >-
+    HTTP API exposed by the Jaeger Query service for retrieving distributed
+    traces, listing services and operations, querying service dependency
+    graphs, and accessing performance metrics including latency, call rates,
+    and error rates.
+  tags:
+  - Distributed Tracing
+  - Observability
+  - Query
+  - Traces
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/jaeger-query-api.yml
+  - type: JSONSchema
+    url: json-schema/jaeger-trace.yml
+  - type: JSON-LD
+    url: json-ld/jaeger-trace.yml
 common: []

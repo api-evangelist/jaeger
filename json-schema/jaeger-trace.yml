@@ -1,0 +1,243 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schema.jaegertracing.io/trace.json
+title: Jaeger Trace
+description: >-
+  A distributed trace as represented by the Jaeger tracing system. A trace
+  describes the end-to-end journey of a request through a distributed system,
+  composed of spans that represent individual units of work performed by
+  different services.
+type: object
+properties:
+  traceID:
+    type: string
+    description: >-
+      Unique trace identifier represented as a hexadecimal string. Can be
+      64-bit (16 hex characters) or 128-bit (32 hex characters).
+    pattern: ^[a-f0-9]{16,32}$
+  spans:
+    type: array
+    description: >-
+      The collection of spans that compose this trace. Spans form a directed
+      acyclic graph representing causal relationships between operations.
+    items:
+      $ref: '#/$defs/Span'
+  processes:
+    type: object
+    description: >-
+      A map of process identifiers to process descriptions. Each process
+      represents a service instance that produced one or more spans in
+      this trace.
+    additionalProperties:
+      $ref: '#/$defs/Process'
+  warnings:
+    type: array
+    description: >-
+      Warnings generated during trace assembly or retrieval, such as
+      missing spans or clock skew adjustments.
+    items:
+      type: string
+required:
+  - traceID
+  - spans
+  - processes
+$defs:
+  Span:
+    type: object
+    title: Span
+    description: >-
+      A span represents a single named and timed operation within a trace.
+      It captures the work done by a single service for a particular request,
+      including timing information, metadata tags, and structured log events.
+    properties:
+      traceID:
+        type: string
+        description: The trace ID this span belongs to.
+        pattern: ^[a-f0-9]{16,32}$
+      spanID:
+        type: string
+        description: >-
+          Unique identifier for this span within the trace, represented as
+          a 16-character hexadecimal string.
+        pattern: ^[a-f0-9]{16}$
+      operationName:
+        type: string
+        description: >-
+          The name of the operation this span represents, typically an RPC
+          method name, HTTP endpoint, or function name.
+      references:
+        type: array
+        description: >-
+          Causal references to other spans. CHILD_OF references indicate a
+          parent-child relationship. FOLLOWS_FROM references indicate a
+          logical dependency without strict containment.
+        items:
+          $ref: '#/$defs/SpanReference'
+      flags:
+        type: integer
+        description: >-
+          Bit field for span flags. Bit 1 indicates the trace was sampled
+          using a debug flag.
+      startTime:
+        type: integer
+        description: >-
+          The start time of the span in microseconds since Unix epoch.
+      duration:
+        type: integer
+        description: >-
+          The duration of the span in microseconds.
+        minimum: 0
+      tags:
+        type: array
+        description: >-
+          Key-value pairs that annotate the span with metadata such as
+          HTTP status codes, database types, peer addresses, and other
+          contextual information.
+        items:
+          $ref: '#/$defs/KeyValue'
+      logs:
+        type: array
+        description: >-
+          Timestamped log entries recorded during the span lifetime.
+          Commonly used to record events such as errors, state transitions,
+          or debugging information.
+        items:
+          $ref: '#/$defs/SpanLog'
+      processID:
+        type: string
+        description: >-
+          An identifier referencing an entry in the trace-level processes
+          map, indicating which service instance produced this span.
+      warnings:
+        type: array
+        description: Warnings specific to this span.
+        items:
+          type: string
+    required:
+      - traceID
+      - spanID
+      - operationName
+      - startTime
+      - duration
+  SpanReference:
+    type: object
+    title: Span Reference
+    description: >-
+      A causal reference between spans establishing the trace graph
+      structure. Follows the OpenTracing specification for span references.
+    properties:
+      refType:
+        type: string
+        description: >-
+          The type of causal relationship. CHILD_OF means the referenced
+          span is the parent. FOLLOWS_FROM means the referenced span is a
+          logical predecessor.
+        enum:
+          - CHILD_OF
+          - FOLLOWS_FROM
+      traceID:
+        type: string
+        description: The trace ID of the referenced span.
+        pattern: ^[a-f0-9]{16,32}$
+      spanID:
+        type: string
+        description: The span ID of the referenced span.
+        pattern: ^[a-f0-9]{16}$
+    required:
+      - refType
+      - traceID
+      - spanID
+  SpanLog:
+    type: object
+    title: Span Log
+    description: >-
+      A timestamped structured log entry within a span. Logs capture
+      discrete events that occur during the span lifecycle.
+    properties:
+      timestamp:
+        type: integer
+        description: The timestamp of the log entry in microseconds since Unix epoch.
+      fields:
+        type: array
+        description: >-
+          Key-value pairs containing the log data. Common keys include
+          event, message, error.object, and stack.
+        items:
+          $ref: '#/$defs/KeyValue'
+    required:
+      - timestamp
+      - fields
+  KeyValue:
+    type: object
+    title: Key-Value Pair
+    description: >-
+      A typed key-value pair used to represent span tags and log fields.
+      The type field indicates how to interpret the value.
+    properties:
+      key:
+        type: string
+        description: The key name identifying this attribute.
+      type:
+        type: string
+        description: >-
+          The data type of the value. Determines how the value field
+          should be interpreted.
+        enum:
+          - string
+          - bool
+          - int64
+          - float64
+          - binary
+      value:
+        description: >-
+          The value of the attribute. The actual type depends on the type
+          field. String and binary values are represented as strings,
+          bool as boolean, int64 as integer, and float64 as number.
+    required:
+      - key
+      - type
+      - value
+  Process:
+    type: object
+    title: Process
+    description: >-
+      A process represents a service instance that generates spans. It
+      contains the service name and optional tags describing the runtime
+      environment such as hostname, IP address, and version.
+    properties:
+      serviceName:
+        type: string
+        description: >-
+          The logical name of the service that produced spans.
+      tags:
+        type: array
+        description: >-
+          Key-value pairs providing additional metadata about the service
+          instance, such as hostname, IP, version, and runtime details.
+        items:
+          $ref: '#/$defs/KeyValue'
+    required:
+      - serviceName
+  DependencyLink:
+    type: object
+    title: Dependency Link
+    description: >-
+      Represents an observed dependency between two services derived from
+      trace data. Shows that the parent service called the child service
+      a certain number of times within the observed time window.
+    properties:
+      parent:
+        type: string
+        description: The name of the calling (upstream) service.
+      child:
+        type: string
+        description: The name of the called (downstream) service.
+      callCount:
+        type: integer
+        description: >-
+          The number of calls from parent to child observed during the
+          time window.
+        minimum: 0
+    required:
+      - parent
+      - child
+      - callCount
