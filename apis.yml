@@ -1,32 +1,47 @@
+aid: jaeger
 name: Jaeger
-description: Open source, end-to-end distributed tracing system for monitoring and
-  troubleshooting microservices-based architectures
-url: https://www.jaegertracing.io/
+description: >-
+  Jaeger is an open source, end-to-end distributed tracing system for
+  monitoring and troubleshooting microservices-based architectures. Jaeger
+  provides visibility into distributed system behavior through trace collection,
+  storage, and visualization.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Distributed Tracing
-- Observability
-- Monitoring
-- Microservices
-created: '2025'
-modified: '2025'
-apis:
-- name: Jaeger Query API
-  description: >-
-    HTTP API exposed by the Jaeger Query service for retrieving distributed
-    traces, listing services and operations, querying service dependency
-    graphs, and accessing performance metrics including latency, call rates,
-    and error rates.
-  tags:
   - Distributed Tracing
   - Observability
-  - Query
-  - Traces
-  - Metrics
-  properties:
-  - type: OpenAPI
-    url: openapi/jaeger-query-api.yml
-  - type: JSONSchema
-    url: json-schema/jaeger-trace.yml
-  - type: JSON-LD
-    url: json-ld/jaeger-trace.yml
-common: []
+  - Monitoring
+  - Microservices
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/jaeger/refs/heads/main/apis.yml
+created: '2025-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+apis:
+  - aid: jaeger:jaeger-query-api
+    name: Jaeger Query API
+    description: >-
+      The Jaeger Query API is an HTTP API exposed by the Jaeger Query service
+      for retrieving distributed traces, listing services and operations,
+      querying service dependency graphs, and accessing performance metrics
+      including latency, call rates, and error rates.
+    humanURL: https://www.jaegertracing.io/docs/latest/apis/
+    tags:
+      - Distributed Tracing
+      - Observability
+      - Traces
+    properties:
+      - type: Documentation
+        url: https://www.jaegertracing.io/docs/latest/apis/
+      - type: OpenAPI
+        url: openapi/jaeger-query-api.yml
+common:
+  - type: Website
+    url: https://www.jaegertracing.io/
+  - type: Documentation
+    url: https://www.jaegertracing.io/docs/
+  - type: GitHub Organization
+    url: https://github.com/jaegertracing
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
