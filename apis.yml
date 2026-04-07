@@ -9,9 +9,9 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Distributed Tracing
-  - Observability
-  - Monitoring
   - Microservices
+  - Monitoring
+  - Observability
 url: >-
   https://raw.githubusercontent.com/api-evangelist/jaeger/refs/heads/main/apis.yml
 created: '2025-01-01'
@@ -30,8 +30,8 @@ apis:
     tags:
       - Distributed Tracing
       - Observability
-      - Traces
       - Query
+      - Traces
     properties:
       - type: Documentation
         url: https://www.jaegertracing.io/docs/latest/apis/
@@ -51,8 +51,8 @@ apis:
       v1.35, as well as legacy Thrift over UDP and HTTP formats.
     humanURL: https://www.jaegertracing.io/docs/latest/apis/
     tags:
-      - Distributed Tracing
       - Collector
+      - Distributed Tracing
       - gRPC
       - OTLP
     properties:
@@ -72,9 +72,9 @@ apis:
     humanURL: https://www.jaegertracing.io/docs/latest/apis/
     tags:
       - Distributed Tracing
-      - Storage
-      - gRPC
       - Extensions
+      - gRPC
+      - Storage
     properties:
       - type: Documentation
         url: https://www.jaegertracing.io/docs/latest/apis/
@@ -91,10 +91,10 @@ apis:
       IDL, supporting both static file-based and adaptive sampling strategies.
     humanURL: https://www.jaegertracing.io/docs/latest/apis/
     tags:
-      - Distributed Tracing
-      - Sampling
-      - gRPC
       - Configuration
+      - Distributed Tracing
+      - gRPC
+      - Sampling
     properties:
       - type: Documentation
         url: https://www.jaegertracing.io/docs/latest/apis/
