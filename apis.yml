@@ -39,7 +39,7 @@ apis:
         url: openapi/jaeger-query-api.yml
       - type: GitHubRepository
         url: https://github.com/jaegertracing/jaeger
-      - type: Change Log
+      - type: ChangeLog
         url: https://github.com/jaegertracing/jaeger/blob/main/CHANGELOG.md
   - aid: jaeger:jaeger-collector-api
     name: Jaeger Collector API
@@ -107,9 +107,9 @@ common:
     url: https://www.jaegertracing.io/
   - type: Documentation
     url: https://www.jaegertracing.io/docs/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://www.jaegertracing.io/docs/latest/getting-started/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/jaegertracing
   - type: GitHubRepository
     url: https://github.com/jaegertracing/jaeger
@@ -119,9 +119,9 @@ common:
     url: https://www.jaegertracing.io/get-involved/
   - type: Support
     url: https://www.jaegertracing.io/get-in-touch/
-  - type: Change Log
+  - type: ChangeLog
     url: https://github.com/jaegertracing/jaeger/blob/main/CHANGELOG.md
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/jaeger-trace.yml
   - type: JSONSchema
     url: json-schema/jaeger-trace.yml
