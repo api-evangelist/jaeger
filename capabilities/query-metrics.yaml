@@ -1,0 +1,290 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Jaeger Query API — Metrics
+  description: 'Jaeger Query API — Metrics. 4 operations. Lead operation: Get call rate metrics. Self-contained Naftiko capability
+    covering one Jaeger business surface.'
+  tags:
+  - Jaeger
+  - Metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    JAEGER_API_KEY: JAEGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: query-metrics
+    baseUri: http://localhost:16686
+    description: Jaeger Query API — Metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: api-metrics-calls
+      path: /api/metrics/calls
+      operations:
+      - name: getcallmetrics
+        method: GET
+        description: Get call rate metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service
+          in: query
+          type: string
+          description: The service name.
+          required: true
+        - name: endTs
+          in: query
+          type: integer
+          description: End timestamp in Unix milliseconds.
+        - name: lookback
+          in: query
+          type: integer
+          description: Duration to look back in milliseconds.
+        - name: step
+          in: query
+          type: integer
+          description: Step duration for bucketing in milliseconds.
+        - name: ratePer
+          in: query
+          type: integer
+          description: Rate normalization duration in milliseconds.
+        - name: spanKind
+          in: query
+          type: string
+          description: Filter by span kind.
+    - name: api-metrics-errors
+      path: /api/metrics/errors
+      operations:
+      - name: geterrormetrics
+        method: GET
+        description: Get error rate metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service
+          in: query
+          type: string
+          description: The service name.
+          required: true
+        - name: endTs
+          in: query
+          type: integer
+          description: End timestamp in Unix milliseconds.
+        - name: lookback
+          in: query
+          type: integer
+          description: Duration to look back in milliseconds.
+        - name: step
+          in: query
+          type: integer
+          description: Step duration for bucketing in milliseconds.
+        - name: ratePer
+          in: query
+          type: integer
+          description: Rate normalization duration in milliseconds.
+        - name: spanKind
+          in: query
+          type: string
+          description: Filter by span kind.
+    - name: api-metrics-latencies
+      path: /api/metrics/latencies
+      operations:
+      - name: getlatencymetrics
+        method: GET
+        description: Get latency metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service
+          in: query
+          type: string
+          description: The service name.
+          required: true
+        - name: quantile
+          in: query
+          type: number
+          description: The quantile to retrieve (e.g. 0.5, 0.75, 0.95, 0.99).
+          required: true
+        - name: endTs
+          in: query
+          type: integer
+          description: End timestamp in Unix milliseconds.
+        - name: lookback
+          in: query
+          type: integer
+          description: Duration to look back in milliseconds.
+        - name: step
+          in: query
+          type: integer
+          description: Step duration for bucketing in milliseconds.
+        - name: ratePer
+          in: query
+          type: integer
+          description: Rate normalization duration in milliseconds.
+        - name: spanKind
+          in: query
+          type: string
+          description: Filter by span kind.
+    - name: api-metrics-minstep
+      path: /api/metrics/minstep
+      operations:
+      - name: getminstep
+        method: GET
+        description: Get minimum step duration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: query-metrics-rest
+    port: 8080
+    description: REST adapter for Jaeger Query API — Metrics. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/metrics/calls
+      name: api-metrics-calls
+      description: REST surface for api-metrics-calls.
+      operations:
+      - method: GET
+        name: getcallmetrics
+        description: Get call rate metrics
+        call: query-metrics.getcallmetrics
+        with:
+          service: rest.service
+          endTs: rest.endTs
+          lookback: rest.lookback
+          step: rest.step
+          ratePer: rest.ratePer
+          spanKind: rest.spanKind
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/metrics/errors
+      name: api-metrics-errors
+      description: REST surface for api-metrics-errors.
+      operations:
+      - method: GET
+        name: geterrormetrics
+        description: Get error rate metrics
+        call: query-metrics.geterrormetrics
+        with:
+          service: rest.service
+          endTs: rest.endTs
+          lookback: rest.lookback
+          step: rest.step
+          ratePer: rest.ratePer
+          spanKind: rest.spanKind
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/metrics/latencies
+      name: api-metrics-latencies
+      description: REST surface for api-metrics-latencies.
+      operations:
+      - method: GET
+        name: getlatencymetrics
+        description: Get latency metrics
+        call: query-metrics.getlatencymetrics
+        with:
+          service: rest.service
+          quantile: rest.quantile
+          endTs: rest.endTs
+          lookback: rest.lookback
+          step: rest.step
+          ratePer: rest.ratePer
+          spanKind: rest.spanKind
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/metrics/minstep
+      name: api-metrics-minstep
+      description: REST surface for api-metrics-minstep.
+      operations:
+      - method: GET
+        name: getminstep
+        description: Get minimum step duration
+        call: query-metrics.getminstep
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: query-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Jaeger Query API — Metrics. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-call-rate-metrics
+      description: Get call rate metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: query-metrics.getcallmetrics
+      with:
+        service: tools.service
+        endTs: tools.endTs
+        lookback: tools.lookback
+        step: tools.step
+        ratePer: tools.ratePer
+        spanKind: tools.spanKind
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-error-rate-metrics
+      description: Get error rate metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: query-metrics.geterrormetrics
+      with:
+        service: tools.service
+        endTs: tools.endTs
+        lookback: tools.lookback
+        step: tools.step
+        ratePer: tools.ratePer
+        spanKind: tools.spanKind
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-latency-metrics
+      description: Get latency metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: query-metrics.getlatencymetrics
+      with:
+        service: tools.service
+        quantile: tools.quantile
+        endTs: tools.endTs
+        lookback: tools.lookback
+        step: tools.step
+        ratePer: tools.ratePer
+        spanKind: tools.spanKind
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-minimum-step-duration
+      description: Get minimum step duration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: query-metrics.getminstep
+      outputParameters:
+      - type: object
+        mapping: $.

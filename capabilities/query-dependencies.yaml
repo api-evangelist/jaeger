@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Jaeger Query API — Dependencies
+  description: 'Jaeger Query API — Dependencies. 1 operations. Lead operation: Get service dependency graph. Self-contained
+    Naftiko capability covering one Jaeger business surface.'
+  tags:
+  - Jaeger
+  - Dependencies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    JAEGER_API_KEY: JAEGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: query-dependencies
+    baseUri: http://localhost:16686
+    description: Jaeger Query API — Dependencies business capability. Self-contained, no shared references.
+    resources:
+    - name: api-dependencies
+      path: /api/dependencies
+      operations:
+      - name: getdependencies
+        method: GET
+        description: Get service dependency graph
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: endTs
+          in: query
+          type: integer
+          description: End timestamp in Unix milliseconds.
+          required: true
+        - name: lookback
+          in: query
+          type: integer
+          description: Duration to look back from endTs in milliseconds.
+          required: true
+  exposes:
+  - type: rest
+    namespace: query-dependencies-rest
+    port: 8080
+    description: REST adapter for Jaeger Query API — Dependencies. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/dependencies
+      name: api-dependencies
+      description: REST surface for api-dependencies.
+      operations:
+      - method: GET
+        name: getdependencies
+        description: Get service dependency graph
+        call: query-dependencies.getdependencies
+        with:
+          endTs: rest.endTs
+          lookback: rest.lookback
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: query-dependencies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Jaeger Query API — Dependencies. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-service-dependency-graph
+      description: Get service dependency graph
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: query-dependencies.getdependencies
+      with:
+        endTs: tools.endTs
+        lookback: tools.lookback
+      outputParameters:
+      - type: object
+        mapping: $.

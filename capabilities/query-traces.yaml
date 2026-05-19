@@ -1,0 +1,180 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Jaeger Query API — Traces
+  description: 'Jaeger Query API — Traces. 2 operations. Lead operation: Search traces. Self-contained Naftiko capability
+    covering one Jaeger business surface.'
+  tags:
+  - Jaeger
+  - Traces
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    JAEGER_API_KEY: JAEGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: query-traces
+    baseUri: http://localhost:16686
+    description: Jaeger Query API — Traces business capability. Self-contained, no shared references.
+    resources:
+    - name: api-traces
+      path: /api/traces
+      operations:
+      - name: searchtraces
+        method: GET
+        description: Search traces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service
+          in: query
+          type: string
+          description: The service name to filter traces by.
+          required: true
+        - name: operation
+          in: query
+          type: string
+          description: The operation name to filter traces by.
+        - name: tags
+          in: query
+          type: string
+          description: Tags to filter by in JSON format, e.g. {"http.status_code":"200"}.
+        - name: start
+          in: query
+          type: integer
+          description: Start time as Unix microseconds.
+        - name: end
+          in: query
+          type: integer
+          description: End time as Unix microseconds.
+        - name: minDuration
+          in: query
+          type: string
+          description: Minimum trace duration filter, specified as a duration string (e.g. 1.2s, 100ms, 500us).
+        - name: maxDuration
+          in: query
+          type: string
+          description: Maximum trace duration filter, specified as a duration string (e.g. 1.2s, 100ms, 500us).
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of traces to return.
+        - name: lookback
+          in: query
+          type: string
+          description: How far back to search for traces, specified as a duration string (e.g. 1h, 2d). Only used if start
+            and end are not set.
+    - name: api-traces-traceID
+      path: /api/traces/{traceID}
+      operations:
+      - name: gettrace
+        method: GET
+        description: Get a trace by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: traceID
+          in: path
+          type: string
+          description: The trace ID in hexadecimal format (16 or 32 hex characters).
+          required: true
+        - name: raw
+          in: query
+          type: boolean
+          description: Return raw trace data without post-processing.
+        - name: prettyPrint
+          in: query
+          type: boolean
+          description: Pretty-print the JSON response.
+  exposes:
+  - type: rest
+    namespace: query-traces-rest
+    port: 8080
+    description: REST adapter for Jaeger Query API — Traces. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/traces
+      name: api-traces
+      description: REST surface for api-traces.
+      operations:
+      - method: GET
+        name: searchtraces
+        description: Search traces
+        call: query-traces.searchtraces
+        with:
+          service: rest.service
+          operation: rest.operation
+          tags: rest.tags
+          start: rest.start
+          end: rest.end
+          minDuration: rest.minDuration
+          maxDuration: rest.maxDuration
+          limit: rest.limit
+          lookback: rest.lookback
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/traces/{traceid}
+      name: api-traces-traceid
+      description: REST surface for api-traces-traceID.
+      operations:
+      - method: GET
+        name: gettrace
+        description: Get a trace by ID
+        call: query-traces.gettrace
+        with:
+          traceID: rest.traceID
+          raw: rest.raw
+          prettyPrint: rest.prettyPrint
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: query-traces-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Jaeger Query API — Traces. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: search-traces
+      description: Search traces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: query-traces.searchtraces
+      with:
+        service: tools.service
+        operation: tools.operation
+        tags: tools.tags
+        start: tools.start
+        end: tools.end
+        minDuration: tools.minDuration
+        maxDuration: tools.maxDuration
+        limit: tools.limit
+        lookback: tools.lookback
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-trace-id
+      description: Get a trace by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: query-traces.gettrace
+      with:
+        traceID: tools.traceID
+        raw: tools.raw
+        prettyPrint: tools.prettyPrint
+      outputParameters:
+      - type: object
+        mapping: $.
