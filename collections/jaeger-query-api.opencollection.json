@@ -1,0 +1,365 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jaeger Query API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Traces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search traces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/traces",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The service name to filter traces by."
+              },
+              {
+                "name": "operation",
+                "value": "",
+                "type": "query",
+                "description": "The operation name to filter traces by."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Tags to filter by in JSON format, e.g. {\"http.status_code\":\"200\"}."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start time as Unix microseconds."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End time as Unix microseconds."
+              },
+              {
+                "name": "minDuration",
+                "value": "",
+                "type": "query",
+                "description": "Minimum trace duration filter, specified as a duration string (e.g. 1.2s, 100ms, 500us)."
+              },
+              {
+                "name": "maxDuration",
+                "value": "",
+                "type": "query",
+                "description": "Maximum trace duration filter, specified as a duration string (e.g. 1.2s, 100ms, 500us)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of traces to return."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "How far back to search for traces, specified as a duration string (e.g. 1h, 2d). Only used if start and end are not set."
+              }
+            ]
+          },
+          "docs": "Search for traces matching the specified query parameters. Returns a list of traces filtered by service, operation, tags, duration, and time range."
+        },
+        {
+          "info": {
+            "name": "Get a trace by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/traces/:traceID",
+            "params": [
+              {
+                "name": "traceID",
+                "value": "",
+                "type": "path",
+                "description": "The trace ID in hexadecimal format (16 or 32 hex characters)."
+              },
+              {
+                "name": "raw",
+                "value": "",
+                "type": "query",
+                "description": "Return raw trace data without post-processing."
+              },
+              {
+                "name": "prettyPrint",
+                "value": "",
+                "type": "query",
+                "description": "Pretty-print the JSON response."
+              }
+            ]
+          },
+          "docs": "Retrieve a single trace by its unique trace identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/services"
+          },
+          "docs": "Retrieve a list of all service names that have reported spans to the Jaeger backend."
+        },
+        {
+          "info": {
+            "name": "Get operations for a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/services/:service/operations",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "path",
+                "description": "The service name."
+              },
+              {
+                "name": "spanKind",
+                "value": "",
+                "type": "query",
+                "description": "Filter operations by span kind (e.g. server, client, producer, consumer)."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of operation names for a given service. Operations represent the individual endpoints or functions being traced within a service."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Dependencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get service dependency graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/dependencies",
+            "params": [
+              {
+                "name": "endTs",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp in Unix milliseconds."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "Duration to look back from endTs in milliseconds."
+              }
+            ]
+          },
+          "docs": "Retrieve the dependency graph showing relationships between services based on observed traces. Returns edges representing calls from one service to another with call counts."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get latency metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/metrics/latencies",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The service name."
+              },
+              {
+                "name": "quantile",
+                "value": "",
+                "type": "query",
+                "description": "The quantile to retrieve (e.g. 0.5, 0.75, 0.95, 0.99)."
+              },
+              {
+                "name": "endTs",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp in Unix milliseconds."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "Duration to look back in milliseconds."
+              },
+              {
+                "name": "step",
+                "value": "",
+                "type": "query",
+                "description": "Step duration for bucketing in milliseconds."
+              },
+              {
+                "name": "ratePer",
+                "value": "",
+                "type": "query",
+                "description": "Rate normalization duration in milliseconds."
+              },
+              {
+                "name": "spanKind",
+                "value": "",
+                "type": "query",
+                "description": "Filter by span kind."
+              }
+            ]
+          },
+          "docs": "Retrieve latency metrics (P50, P75, P95, P99) for a service, grouped by time buckets. Requires the metrics storage backend to be configured."
+        },
+        {
+          "info": {
+            "name": "Get call rate metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/metrics/calls",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The service name."
+              },
+              {
+                "name": "endTs",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp in Unix milliseconds."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "Duration to look back in milliseconds."
+              },
+              {
+                "name": "step",
+                "value": "",
+                "type": "query",
+                "description": "Step duration for bucketing in milliseconds."
+              },
+              {
+                "name": "ratePer",
+                "value": "",
+                "type": "query",
+                "description": "Rate normalization duration in milliseconds."
+              },
+              {
+                "name": "spanKind",
+                "value": "",
+                "type": "query",
+                "description": "Filter by span kind."
+              }
+            ]
+          },
+          "docs": "Retrieve call rate metrics for a service, grouped by time buckets. Requires the metrics storage backend to be configured."
+        },
+        {
+          "info": {
+            "name": "Get error rate metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/metrics/errors",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The service name."
+              },
+              {
+                "name": "endTs",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp in Unix milliseconds."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "Duration to look back in milliseconds."
+              },
+              {
+                "name": "step",
+                "value": "",
+                "type": "query",
+                "description": "Step duration for bucketing in milliseconds."
+              },
+              {
+                "name": "ratePer",
+                "value": "",
+                "type": "query",
+                "description": "Rate normalization duration in milliseconds."
+              },
+              {
+                "name": "spanKind",
+                "value": "",
+                "type": "query",
+                "description": "Filter by span kind."
+              }
+            ]
+          },
+          "docs": "Retrieve error rate metrics for a service, grouped by time buckets. Requires the metrics storage backend to be configured."
+        },
+        {
+          "info": {
+            "name": "Get minimum step duration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/metrics/minstep"
+          },
+          "docs": "Retrieve the minimum time resolution (step) supported by the metrics backend."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

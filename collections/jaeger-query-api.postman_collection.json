@@ -1,0 +1,1906 @@
+{
+  "item": [
+    {
+      "id": "a6a93718-6137-4c90-bfcb-c40cdf5308db",
+      "name": "Traces",
+      "description": {
+        "content": "Endpoints for searching and retrieving distributed traces.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d6b7e19e-74fc-410a-a67f-373150415616",
+          "name": "Search traces",
+          "request": {
+            "name": "Search traces",
+            "description": {
+              "content": "Search for traces matching the specified query parameters. Returns a list of traces filtered by service, operation, tags, duration, and time range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "traces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "(Required) The service name to filter traces by."
+                },
+                {
+                  "disabled": false,
+                  "key": "operation",
+                  "value": "<string>",
+                  "description": "The operation name to filter traces by."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Tags to filter by in JSON format, e.g. {\"http.status_code\":\"200\"}."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<long>",
+                  "description": "Start time as Unix microseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<long>",
+                  "description": "End time as Unix microseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "minDuration",
+                  "value": "<string>",
+                  "description": "Minimum trace duration filter, specified as a duration string (e.g. 1.2s, 100ms, 500us)."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxDuration",
+                  "value": "<string>",
+                  "description": "Maximum trace duration filter, specified as a duration string (e.g. 1.2s, 100ms, 500us)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of traces to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "lookback",
+                  "value": "<string>",
+                  "description": "How far back to search for traces, specified as a duration string (e.g. 1h, 2d). Only used if start and end are not set."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d92e73d0-a802-4014-b468-bac032791f29",
+              "name": "A list of matching traces.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "minDuration",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxDuration",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"traceID\": \"string\",\n      \"spans\": [\n        {\n          \"traceID\": \"string\",\n          \"spanID\": \"string\",\n          \"operationName\": \"string\",\n          \"startTime\": 8848,\n          \"duration\": 6873,\n          \"references\": [\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"flags\": 5027,\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"logs\": [\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"processID\": \"string\",\n          \"warnings\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"traceID\": \"string\",\n          \"spanID\": \"string\",\n          \"operationName\": \"string\",\n          \"startTime\": 9681,\n          \"duration\": 2452,\n          \"references\": [\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"flags\": 2110,\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"logs\": [\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"processID\": \"string\",\n          \"warnings\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"processes\": {\n        \"key_0\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"traceID\": \"string\",\n      \"spans\": [\n        {\n          \"traceID\": \"string\",\n          \"spanID\": \"string\",\n          \"operationName\": \"string\",\n          \"startTime\": 1394,\n          \"duration\": 2425,\n          \"references\": [\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"flags\": 8683,\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"logs\": [\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"processID\": \"string\",\n          \"warnings\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"traceID\": \"string\",\n          \"spanID\": \"string\",\n          \"operationName\": \"string\",\n          \"startTime\": 5652,\n          \"duration\": 587,\n          \"references\": [\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"flags\": 5992,\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"logs\": [\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"processID\": \"string\",\n          \"warnings\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"processes\": {\n        \"key_0\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"key_1\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"key_2\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"key_3\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"key_4\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"total\": 8333,\n  \"limit\": 5795,\n  \"offset\": 6197,\n  \"errors\": [\n    {\n      \"code\": 4004,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    },\n    {\n      \"code\": 581,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59b49b36-0871-4f1b-b636-d397240ebd3a",
+              "name": "Invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "minDuration",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxDuration",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f6d72b84-41dd-4034-bad4-baadc09605c2",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "minDuration",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxDuration",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2572e1c-24bc-461b-bde7-a749d088cc61",
+          "name": "Get a trace by ID",
+          "request": {
+            "name": "Get a trace by ID",
+            "description": {
+              "content": "Retrieve a single trace by its unique trace identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "traces",
+                ":traceID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "raw",
+                  "value": "false",
+                  "description": "Return raw trace data without post-processing."
+                },
+                {
+                  "disabled": false,
+                  "key": "prettyPrint",
+                  "value": "false",
+                  "description": "Pretty-print the JSON response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "traceID",
+                  "description": "(Required) The trace ID in hexadecimal format (16 or 32 hex characters)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14e52c94-7fba-4611-855d-c4afa44c9e6c",
+              "name": "The requested trace.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "traces",
+                    ":traceID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "raw",
+                      "value": "false"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "traceID",
+                      "description": "(Required) The trace ID in hexadecimal format (16 or 32 hex characters)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"traceID\": \"string\",\n      \"spans\": [\n        {\n          \"traceID\": \"string\",\n          \"spanID\": \"string\",\n          \"operationName\": \"string\",\n          \"startTime\": 2537,\n          \"duration\": 3561,\n          \"references\": [\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"flags\": 9867,\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"logs\": [\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"processID\": \"string\",\n          \"warnings\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"traceID\": \"string\",\n          \"spanID\": \"string\",\n          \"operationName\": \"string\",\n          \"startTime\": 1862,\n          \"duration\": 398,\n          \"references\": [\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"flags\": 84,\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"logs\": [\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"processID\": \"string\",\n          \"warnings\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"processes\": {\n        \"key_0\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"key_1\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"traceID\": \"string\",\n      \"spans\": [\n        {\n          \"traceID\": \"string\",\n          \"spanID\": \"string\",\n          \"operationName\": \"string\",\n          \"startTime\": 7386,\n          \"duration\": 713,\n          \"references\": [\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"flags\": 7362,\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"logs\": [\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"processID\": \"string\",\n          \"warnings\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"traceID\": \"string\",\n          \"spanID\": \"string\",\n          \"operationName\": \"string\",\n          \"startTime\": 1063,\n          \"duration\": 7713,\n          \"references\": [\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"refType\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"traceID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spanID\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"flags\": 3577,\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"logs\": [\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"fields\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"processID\": \"string\",\n          \"warnings\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"processes\": {\n        \"key_0\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"key_1\": {\n          \"serviceName\": \"string\",\n          \"tags\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"errors\": [\n    {\n      \"code\": 9508,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    },\n    {\n      \"code\": 9938,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "092b5892-ab2a-4634-81a6-7a80cfb3b9dd",
+              "name": "Trace not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "traces",
+                    ":traceID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "raw",
+                      "value": "false"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "traceID",
+                      "description": "(Required) The trace ID in hexadecimal format (16 or 32 hex characters)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ab8c325-c6fa-4033-b66f-48747688b173",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "traces",
+                    ":traceID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "raw",
+                      "value": "false"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "traceID",
+                      "description": "(Required) The trace ID in hexadecimal format (16 or 32 hex characters)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "029b7788-0fc0-4cb8-821a-7fc2bb81d7ae",
+      "name": "Services",
+      "description": {
+        "content": "Endpoints for listing services and their operations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "16f7bfb5-1f53-4257-84a2-23e4aea5e3b7",
+          "name": "Get all services",
+          "request": {
+            "name": "Get all services",
+            "description": {
+              "content": "Retrieve a list of all service names that have reported spans to the Jaeger backend.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5e158d7-e112-400c-b128-e7562b1db845",
+              "name": "A list of service names.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"string\",\n    \"string\"\n  ],\n  \"total\": 7166,\n  \"limit\": 2629,\n  \"offset\": 3046,\n  \"errors\": [\n    {\n      \"code\": 186,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    },\n    {\n      \"code\": 321,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a0ffedf-8055-4952-a555-593849ea94be",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8efc008-67da-48ba-b3bf-8513678a09f3",
+          "name": "Get operations for a service",
+          "request": {
+            "name": "Get operations for a service",
+            "description": {
+              "content": "Retrieve a list of operation names for a given service. Operations represent the individual endpoints or functions being traced within a service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "services",
+                ":service",
+                "operations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "spanKind",
+                  "value": "<string>",
+                  "description": "Filter operations by span kind (e.g. server, client, producer, consumer)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "service",
+                  "description": "(Required) The service name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b8e5a2c-d7dd-4f0a-8c44-6ce5d0c08b4d",
+              "name": "A list of operation names.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services",
+                    ":service",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service",
+                      "description": "(Required) The service name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"spanKind\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"spanKind\": \"string\"\n    }\n  ],\n  \"total\": 1140,\n  \"limit\": 4850,\n  \"offset\": 6956,\n  \"errors\": [\n    {\n      \"code\": 2357,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    },\n    {\n      \"code\": 4209,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c92cc30-acf7-4b8f-a58b-baa47a0b00ae",
+              "name": "Service not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services",
+                    ":service",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service",
+                      "description": "(Required) The service name."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba11c498-8745-402e-8cf0-d69d34764616",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services",
+                    ":service",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service",
+                      "description": "(Required) The service name."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d4455899-2c6f-408b-924e-c097d5218fda",
+      "name": "Dependencies",
+      "description": {
+        "content": "Endpoints for retrieving service dependency graphs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6841b97e-0347-4544-8dbc-600677d02cd1",
+          "name": "Get service dependency graph",
+          "request": {
+            "name": "Get service dependency graph",
+            "description": {
+              "content": "Retrieve the dependency graph showing relationships between services based on observed traces. Returns edges representing calls from one service to another with call counts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "dependencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "endTs",
+                  "value": "<long>",
+                  "description": "(Required) End timestamp in Unix milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "lookback",
+                  "value": "<long>",
+                  "description": "(Required) Duration to look back from endTs in milliseconds."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8ea7ef2-48ba-41e9-9f42-8a14342d08ff",
+              "name": "A list of service dependency links.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"parent\": \"string\",\n      \"child\": \"string\",\n      \"callCount\": 8147\n    },\n    {\n      \"parent\": \"string\",\n      \"child\": \"string\",\n      \"callCount\": 9921\n    }\n  ],\n  \"errors\": [\n    {\n      \"code\": 2374,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    },\n    {\n      \"code\": 1190,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6d64b4e-d8db-4122-b1ce-715de4fbb1e5",
+              "name": "Invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c425b153-d5b0-415e-969a-8981e7e08b77",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "db8c2ca6-50e1-4b57-9bb9-46b35dcf45c3",
+      "name": "Metrics",
+      "description": {
+        "content": "Endpoints for retrieving service performance metrics including latency, call rates, and error rates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ddc6267b-cc58-46b0-8a77-d1034469f91c",
+          "name": "Get latency metrics",
+          "request": {
+            "name": "Get latency metrics",
+            "description": {
+              "content": "Retrieve latency metrics (P50, P75, P95, P99) for a service, grouped by time buckets. Requires the metrics storage backend to be configured.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "metrics",
+                "latencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "(Required) The service name."
+                },
+                {
+                  "disabled": false,
+                  "key": "quantile",
+                  "value": "<double>",
+                  "description": "(Required) The quantile to retrieve (e.g. 0.5, 0.75, 0.95, 0.99)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTs",
+                  "value": "<long>",
+                  "description": "End timestamp in Unix milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "lookback",
+                  "value": "<long>",
+                  "description": "Duration to look back in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<long>",
+                  "description": "Step duration for bucketing in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "ratePer",
+                  "value": "<long>",
+                  "description": "Rate normalization duration in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "spanKind",
+                  "value": "<string>",
+                  "description": "Filter by span kind."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81425141-9775-46e2-b0aa-66fa0d08a962",
+              "name": "Latency metric data points.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "latencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "quantile",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"help\": \"string\",\n  \"metrics\": [\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"2018-11-27T20:59:30.675Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 8329.143818038709\n          }\n        },\n        {\n          \"timestamp\": \"1971-09-14T03:25:38.941Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 7162.191017042641\n          }\n        }\n      ]\n    },\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"2002-12-14T18:22:08.503Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 511.7196430095683\n          }\n        },\n        {\n          \"timestamp\": \"2020-11-06T19:25:08.795Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 6425.700050572174\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6142bfb8-445c-4d50-a400-58de829dc311",
+              "name": "Invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "latencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "quantile",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fabbf16a-c5d1-481c-a888-b09106743c46",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "latencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "quantile",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "652f73bb-8b61-4371-91d1-c56ccded19cb",
+          "name": "Get call rate metrics",
+          "request": {
+            "name": "Get call rate metrics",
+            "description": {
+              "content": "Retrieve call rate metrics for a service, grouped by time buckets. Requires the metrics storage backend to be configured.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "metrics",
+                "calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "(Required) The service name."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTs",
+                  "value": "<long>",
+                  "description": "End timestamp in Unix milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "lookback",
+                  "value": "<long>",
+                  "description": "Duration to look back in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<long>",
+                  "description": "Step duration for bucketing in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "ratePer",
+                  "value": "<long>",
+                  "description": "Rate normalization duration in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "spanKind",
+                  "value": "<string>",
+                  "description": "Filter by span kind."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59c96f97-b2c7-4b26-9720-3726a18bc461",
+              "name": "Call rate metric data points.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"help\": \"string\",\n  \"metrics\": [\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"1951-01-04T00:59:59.917Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 5794.309487994637\n          }\n        },\n        {\n          \"timestamp\": \"1947-03-27T13:25:55.501Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 2566.6618841188247\n          }\n        }\n      ]\n    },\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"2013-07-06T07:34:46.188Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 3550.8758605577373\n          }\n        },\n        {\n          \"timestamp\": \"1976-09-10T16:54:58.847Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 1299.2505007615673\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5545659-9139-4753-befb-68772cf94c29",
+              "name": "Invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d97edc11-f3d9-4110-8b49-006c4fab973b",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e07da96-9645-416d-aece-8e7a4d3d58b3",
+          "name": "Get error rate metrics",
+          "request": {
+            "name": "Get error rate metrics",
+            "description": {
+              "content": "Retrieve error rate metrics for a service, grouped by time buckets. Requires the metrics storage backend to be configured.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "metrics",
+                "errors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "(Required) The service name."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTs",
+                  "value": "<long>",
+                  "description": "End timestamp in Unix milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "lookback",
+                  "value": "<long>",
+                  "description": "Duration to look back in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<long>",
+                  "description": "Step duration for bucketing in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "ratePer",
+                  "value": "<long>",
+                  "description": "Rate normalization duration in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "spanKind",
+                  "value": "<string>",
+                  "description": "Filter by span kind."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90a8ba26-6750-4993-948d-26a71dfcbcc6",
+              "name": "Error rate metric data points.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"help\": \"string\",\n  \"metrics\": [\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"1951-01-04T00:59:59.917Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 5794.309487994637\n          }\n        },\n        {\n          \"timestamp\": \"1947-03-27T13:25:55.501Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 2566.6618841188247\n          }\n        }\n      ]\n    },\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"2013-07-06T07:34:46.188Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 3550.8758605577373\n          }\n        },\n        {\n          \"timestamp\": \"1976-09-10T16:54:58.847Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 1299.2505007615673\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3ea5695-137e-4ec1-8645-74cabb62fcd5",
+              "name": "Invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c8c6ccd-f202-4acc-ba39-56bc7f70aecc",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c13b4d1-c72b-420c-9e71-3f4d2092ab21",
+          "name": "Get minimum step duration",
+          "request": {
+            "name": "Get minimum step duration",
+            "description": {
+              "content": "Retrieve the minimum time resolution (step) supported by the metrics backend.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "metrics",
+                "minstep"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f6bd2a7-baf5-4273-b40d-f1524d06dcb8",
+              "name": "The minimum step duration in milliseconds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "minstep"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "4070",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcc98bf5-83a7-4c63-a0bd-c98edae26a4f",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "minstep"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:16686",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c904f6a5-4471-4648-8412-080d5470f8b5",
+    "name": "Jaeger Query API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Jaeger Query API provides HTTP endpoints for retrieving trace data, service information, operations, and dependency graphs from the Jaeger distributed tracing backend. This API is exposed by the jaeger-query component and is used by the Jaeger UI and other clients to search and retrieve distributed traces collected across microservices.\n\nContact Support:\n Name: Jaeger Project",
+      "type": "text/plain"
+    }
+  }
+}
