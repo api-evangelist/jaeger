@@ -5,7 +5,7 @@ description: >-
   architectures. Jaeger provides visibility into distributed system behavior through trace collection, storage, and
   visualization.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Distributed Tracing
   - Microservices
