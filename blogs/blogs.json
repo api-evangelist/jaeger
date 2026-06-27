@@ -3,19 +3,18 @@
   "feeds": [
     {
       "source": "https://www.jaegertracing.io/news/",
-      "feed_url": "https://www.jaegertracing.io/news/",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     },
     {
       "source": "https://github.com/jaegertracing/jaeger",
-      "feed_url": "https://github.com/jaegertracing/jaeger",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
-  "post_count": 0
+  "fetched": "2026-06-27T12:49:29Z",
+  "post_count": 0,
+  "agent_pulled": "2026-06-27"
 }
