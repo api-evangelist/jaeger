@@ -96,6 +96,8 @@ apis:
       - type: GitHubRepository
         url: https://github.com/jaegertracing/jaeger
 common:
+  - type: DomainSecurity
+    url: security/jaeger-domain-security.yml
   - type: Website
     url: https://www.jaegertracing.io/
   - type: Documentation
