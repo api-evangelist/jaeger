@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: Jaeger Query Dependencies Services API
+  description: The Jaeger Query API provides HTTP endpoints for retrieving trace data, service information, operations, and dependency graphs from the Jaeger distributed tracing backend. This API is exposed by the jaeger-query component and is used by the Jaeger UI and other clients to search and retrieve distributed traces collected across microservices.
+  version: 1.0.0
+  contact:
+    name: Jaeger Project
+    url: https://www.jaegertracing.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:16686
+  description: Default Jaeger Query server
+tags:
+- name: Services
+  description: Endpoints for listing services and their operations.
+paths:
+  /api/services:
+    get:
+      operationId: getServices
+      summary: Get all services
+      description: Retrieve a list of all service names that have reported spans to the Jaeger backend.
+      tags:
+      - Services
+      responses:
+        '200':
+          description: A list of service names.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StructuredError'
+        '500':
+          description: Internal server error.
+  /api/services/{service}/operations:
+    get:
+      operationId: getOperations
+      summary: Get operations for a service
+      description: Retrieve a list of operation names for a given service. Operations represent the individual endpoints or functions being traced within a service.
+      tags:
+      - Services
+      parameters:
+      - name: service
+        in: path
+        required: true
+        description: The service name.
+        schema:
+          type: string
+      - name: spanKind
+        in: query
+        description: Filter operations by span kind (e.g. server, client, producer, consumer).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of operation names.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The operation name.
+                        spanKind:
+                          type: string
+                          description: The span kind for this operation.
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StructuredError'
+        '404':
+          description: Service not found.
+        '500':
+          description: Internal server error.
+components:
+  schemas:
+    StructuredError:
+      type: object
+      description: A structured error returned by the API.
+      properties:
+        code:
+          type: integer
+          description: Error code.
+        msg:
+          type: string
+          description: Error message.
+        traceID:
+          type: string
+          description: Trace ID associated with the error, if applicable.
