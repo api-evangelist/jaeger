@@ -1,0 +1,753 @@
+openapi: 3.0.3
+info:
+  title: Jaeger Query API
+  description: >-
+    The Jaeger Query API provides HTTP endpoints for retrieving trace data,
+    service information, operations, and dependency graphs from the Jaeger
+    distributed tracing backend. This API is exposed by the jaeger-query
+    component and is used by the Jaeger UI and other clients to search and
+    retrieve distributed traces collected across microservices.
+  version: 1.0.0
+  contact:
+    name: Jaeger Project
+    url: https://www.jaegertracing.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: http://localhost:16686
+    description: Default Jaeger Query server
+paths:
+  /api/traces:
+    get:
+      operationId: searchTraces
+      summary: Search traces
+      description: >-
+        Search for traces matching the specified query parameters. Returns
+        a list of traces filtered by service, operation, tags, duration,
+        and time range.
+      tags:
+        - Traces
+      parameters:
+        - name: service
+          in: query
+          description: The service name to filter traces by.
+          required: true
+          schema:
+            type: string
+        - name: operation
+          in: query
+          description: The operation name to filter traces by.
+          schema:
+            type: string
+        - name: tags
+          in: query
+          description: >-
+            Tags to filter by in JSON format, e.g. {"http.status_code":"200"}.
+          schema:
+            type: string
+        - name: start
+          in: query
+          description: Start time as Unix microseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: end
+          in: query
+          description: End time as Unix microseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: minDuration
+          in: query
+          description: >-
+            Minimum trace duration filter, specified as a duration string
+            (e.g. 1.2s, 100ms, 500us).
+          schema:
+            type: string
+        - name: maxDuration
+          in: query
+          description: >-
+            Maximum trace duration filter, specified as a duration string
+            (e.g. 1.2s, 100ms, 500us).
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of traces to return.
+          schema:
+            type: integer
+            default: 20
+        - name: lookback
+          in: query
+          description: >-
+            How far back to search for traces, specified as a duration
+            string (e.g. 1h, 2d). Only used if start and end are not set.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of matching traces.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Trace'
+                  total:
+                    type: integer
+                    description: Total number of matching traces.
+                  limit:
+                    type: integer
+                    description: Limit applied to the query.
+                  offset:
+                    type: integer
+                    description: Offset applied to the query.
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StructuredError'
+        '400':
+          description: Invalid query parameters.
+        '500':
+          description: Internal server error.
+  /api/traces/{traceID}:
+    get:
+      operationId: getTrace
+      summary: Get a trace by ID
+      description: Retrieve a single trace by its unique trace identifier.
+      tags:
+        - Traces
+      parameters:
+        - name: traceID
+          in: path
+          required: true
+          description: >-
+            The trace ID in hexadecimal format (16 or 32 hex characters).
+          schema:
+            type: string
+        - name: raw
+          in: query
+          description: Return raw trace data without post-processing.
+          schema:
+            type: boolean
+            default: false
+        - name: prettyPrint
+          in: query
+          description: Pretty-print the JSON response.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: The requested trace.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Trace'
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StructuredError'
+        '404':
+          description: Trace not found.
+        '500':
+          description: Internal server error.
+  /api/services:
+    get:
+      operationId: getServices
+      summary: Get all services
+      description: >-
+        Retrieve a list of all service names that have reported spans
+        to the Jaeger backend.
+      tags:
+        - Services
+      responses:
+        '200':
+          description: A list of service names.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StructuredError'
+        '500':
+          description: Internal server error.
+  /api/services/{service}/operations:
+    get:
+      operationId: getOperations
+      summary: Get operations for a service
+      description: >-
+        Retrieve a list of operation names for a given service. Operations
+        represent the individual endpoints or functions being traced within
+        a service.
+      tags:
+        - Services
+      parameters:
+        - name: service
+          in: path
+          required: true
+          description: The service name.
+          schema:
+            type: string
+        - name: spanKind
+          in: query
+          description: >-
+            Filter operations by span kind (e.g. server, client, producer,
+            consumer).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of operation names.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The operation name.
+                        spanKind:
+                          type: string
+                          description: The span kind for this operation.
+                  total:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StructuredError'
+        '404':
+          description: Service not found.
+        '500':
+          description: Internal server error.
+  /api/dependencies:
+    get:
+      operationId: getDependencies
+      summary: Get service dependency graph
+      description: >-
+        Retrieve the dependency graph showing relationships between
+        services based on observed traces. Returns edges representing
+        calls from one service to another with call counts.
+      tags:
+        - Dependencies
+      parameters:
+        - name: endTs
+          in: query
+          description: End timestamp in Unix milliseconds.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: lookback
+          in: query
+          description: >-
+            Duration to look back from endTs in milliseconds.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A list of service dependency links.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DependencyLink'
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StructuredError'
+        '400':
+          description: Invalid query parameters.
+        '500':
+          description: Internal server error.
+  /api/metrics/latencies:
+    get:
+      operationId: getLatencyMetrics
+      summary: Get latency metrics
+      description: >-
+        Retrieve latency metrics (P50, P75, P95, P99) for a service,
+        grouped by time buckets. Requires the metrics storage backend
+        to be configured.
+      tags:
+        - Metrics
+      parameters:
+        - name: service
+          in: query
+          required: true
+          description: The service name.
+          schema:
+            type: string
+        - name: quantile
+          in: query
+          required: true
+          description: The quantile to retrieve (e.g. 0.5, 0.75, 0.95, 0.99).
+          schema:
+            type: number
+            format: double
+        - name: endTs
+          in: query
+          description: End timestamp in Unix milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: lookback
+          in: query
+          description: Duration to look back in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: step
+          in: query
+          description: Step duration for bucketing in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: ratePer
+          in: query
+          description: Rate normalization duration in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: spanKind
+          in: query
+          description: Filter by span kind.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Latency metric data points.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricResponse'
+        '400':
+          description: Invalid query parameters.
+        '500':
+          description: Internal server error.
+  /api/metrics/calls:
+    get:
+      operationId: getCallMetrics
+      summary: Get call rate metrics
+      description: >-
+        Retrieve call rate metrics for a service, grouped by time buckets.
+        Requires the metrics storage backend to be configured.
+      tags:
+        - Metrics
+      parameters:
+        - name: service
+          in: query
+          required: true
+          description: The service name.
+          schema:
+            type: string
+        - name: endTs
+          in: query
+          description: End timestamp in Unix milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: lookback
+          in: query
+          description: Duration to look back in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: step
+          in: query
+          description: Step duration for bucketing in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: ratePer
+          in: query
+          description: Rate normalization duration in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: spanKind
+          in: query
+          description: Filter by span kind.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Call rate metric data points.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricResponse'
+        '400':
+          description: Invalid query parameters.
+        '500':
+          description: Internal server error.
+  /api/metrics/errors:
+    get:
+      operationId: getErrorMetrics
+      summary: Get error rate metrics
+      description: >-
+        Retrieve error rate metrics for a service, grouped by time
+        buckets. Requires the metrics storage backend to be configured.
+      tags:
+        - Metrics
+      parameters:
+        - name: service
+          in: query
+          required: true
+          description: The service name.
+          schema:
+            type: string
+        - name: endTs
+          in: query
+          description: End timestamp in Unix milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: lookback
+          in: query
+          description: Duration to look back in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: step
+          in: query
+          description: Step duration for bucketing in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: ratePer
+          in: query
+          description: Rate normalization duration in milliseconds.
+          schema:
+            type: integer
+            format: int64
+        - name: spanKind
+          in: query
+          description: Filter by span kind.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Error rate metric data points.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricResponse'
+        '400':
+          description: Invalid query parameters.
+        '500':
+          description: Internal server error.
+  /api/metrics/minstep:
+    get:
+      operationId: getMinStep
+      summary: Get minimum step duration
+      description: >-
+        Retrieve the minimum time resolution (step) supported by the
+        metrics backend.
+      tags:
+        - Metrics
+      responses:
+        '200':
+          description: The minimum step duration in milliseconds.
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '500':
+          description: Internal server error.
+components:
+  schemas:
+    Trace:
+      type: object
+      description: >-
+        A trace represents the complete journey of a request through a
+        distributed system. It consists of one or more spans forming a
+        directed acyclic graph.
+      properties:
+        traceID:
+          type: string
+          description: >-
+            Unique trace identifier in hexadecimal format (16 or 32 hex
+            characters).
+        spans:
+          type: array
+          description: The spans that make up this trace.
+          items:
+            $ref: '#/components/schemas/Span'
+        processes:
+          type: object
+          description: >-
+            Map of process IDs to process objects. Processes represent the
+            services that produced spans in this trace.
+          additionalProperties:
+            $ref: '#/components/schemas/Process'
+        warnings:
+          type: array
+          description: Warnings generated during trace retrieval.
+          items:
+            type: string
+      required:
+        - traceID
+        - spans
+        - processes
+    Span:
+      type: object
+      description: >-
+        A span represents a single unit of work within a trace. Spans have
+        a start time, duration, and contain metadata about the operation
+        being performed.
+      properties:
+        traceID:
+          type: string
+          description: The trace ID this span belongs to.
+        spanID:
+          type: string
+          description: Unique span identifier in hexadecimal format.
+        operationName:
+          type: string
+          description: The name of the operation this span represents.
+        references:
+          type: array
+          description: References to other spans (parent or follows-from).
+          items:
+            $ref: '#/components/schemas/SpanReference'
+        flags:
+          type: integer
+          description: Span flags for sampling and other options.
+        startTime:
+          type: integer
+          format: int64
+          description: Start time of the span in Unix microseconds.
+        duration:
+          type: integer
+          format: int64
+          description: Duration of the span in microseconds.
+        tags:
+          type: array
+          description: Key-value pairs providing additional span metadata.
+          items:
+            $ref: '#/components/schemas/KeyValue'
+        logs:
+          type: array
+          description: >-
+            Time-stamped log entries associated with this span, used to
+            record events during the span lifecycle.
+          items:
+            $ref: '#/components/schemas/SpanLog'
+        processID:
+          type: string
+          description: >-
+            Reference to the process that produced this span, corresponding
+            to a key in the trace-level processes map.
+        warnings:
+          type: array
+          description: Warnings generated for this span.
+          items:
+            type: string
+      required:
+        - traceID
+        - spanID
+        - operationName
+        - startTime
+        - duration
+    SpanReference:
+      type: object
+      description: >-
+        A reference from one span to another, establishing causal
+        relationships within a trace.
+      properties:
+        refType:
+          type: string
+          description: The type of reference.
+          enum:
+            - CHILD_OF
+            - FOLLOWS_FROM
+        traceID:
+          type: string
+          description: The trace ID of the referenced span.
+        spanID:
+          type: string
+          description: The span ID of the referenced span.
+      required:
+        - refType
+        - traceID
+        - spanID
+    SpanLog:
+      type: object
+      description: A time-stamped log entry within a span.
+      properties:
+        timestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the log entry in Unix microseconds.
+        fields:
+          type: array
+          description: Key-value pairs representing the log data.
+          items:
+            $ref: '#/components/schemas/KeyValue'
+      required:
+        - timestamp
+        - fields
+    KeyValue:
+      type: object
+      description: >-
+        A typed key-value pair used for span tags and log fields.
+      properties:
+        key:
+          type: string
+          description: The key name.
+        type:
+          type: string
+          description: The value type.
+          enum:
+            - string
+            - bool
+            - int64
+            - float64
+            - binary
+        value:
+          description: The value, type depends on the type field.
+      required:
+        - key
+        - type
+        - value
+    Process:
+      type: object
+      description: >-
+        A process represents the service instance that produced spans.
+      properties:
+        serviceName:
+          type: string
+          description: The name of the service.
+        tags:
+          type: array
+          description: Additional metadata about the process.
+          items:
+            $ref: '#/components/schemas/KeyValue'
+      required:
+        - serviceName
+    DependencyLink:
+      type: object
+      description: >-
+        A dependency link represents an observed call relationship between
+        two services within the traced system.
+      properties:
+        parent:
+          type: string
+          description: The calling (upstream) service name.
+        child:
+          type: string
+          description: The called (downstream) service name.
+        callCount:
+          type: integer
+          format: int64
+          description: The number of calls observed between the services.
+      required:
+        - parent
+        - child
+        - callCount
+    MetricResponse:
+      type: object
+      description: Response containing time-series metric data.
+      properties:
+        name:
+          type: string
+          description: The name of the metric.
+        type:
+          type: string
+          description: The type of metric (e.g. GAUGE).
+        help:
+          type: string
+          description: Help text describing the metric.
+        metrics:
+          type: array
+          items:
+            type: object
+            properties:
+              labels:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+              metricPoints:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    timestamp:
+                      type: string
+                      format: date-time
+                    gaugeValue:
+                      type: object
+                      properties:
+                        doubleValue:
+                          type: number
+                          format: double
+    StructuredError:
+      type: object
+      description: A structured error returned by the API.
+      properties:
+        code:
+          type: integer
+          description: Error code.
+        msg:
+          type: string
+          description: Error message.
+        traceID:
+          type: string
+          description: >-
+            Trace ID associated with the error, if applicable.
+  parameters: {}
+  responses: {}
+tags:
+  - name: Traces
+    description: Endpoints for searching and retrieving distributed traces.
+  - name: Services
+    description: Endpoints for listing services and their operations.
+  - name: Dependencies
+    description: Endpoints for retrieving service dependency graphs.
+  - name: Metrics
+    description: >-
+      Endpoints for retrieving service performance metrics including
+      latency, call rates, and error rates.

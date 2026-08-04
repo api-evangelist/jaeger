@@ -1,0 +1,20 @@
+{
+  "provider": "jaeger",
+  "sources": [
+    "jaeger-dependencies-api-openapi.yml",
+    "jaeger-metrics-api-openapi.yml",
+    "jaeger-services-api-openapi.yml",
+    "jaeger-traces-api-openapi.yml"
+  ],
+  "outputs": [
+    "jaeger-dependencies-api-openapi.yml",
+    "jaeger-metrics-api-openapi.yml",
+    "jaeger-services-api-openapi.yml",
+    "jaeger-traces-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
