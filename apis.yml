@@ -148,6 +148,19 @@ apis:
   - type: ChangeLog
     url: https://github.com/jaegertracing/jaeger/blob/main/CHANGELOG.md
 common:
+  - type: IssueTracker
+    url: https://github.com/jaegertracing/jaeger/issues
+  - type: Releases
+    url: https://github.com/jaegertracing/jaeger/releases
+  - type: SecurityPolicy
+    url: https://github.com/jaegertracing/jaeger/blob/main/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/jaegertracing/jaeger/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/jaegertracing/jaeger/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/jaeger-agentic-access.yml
   - type: DomainSecurity
