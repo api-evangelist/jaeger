@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jaeger Query Dependencies Traces API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Traces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search traces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/traces",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The service name to filter traces by."
+              },
+              {
+                "name": "operation",
+                "value": "",
+                "type": "query",
+                "description": "The operation name to filter traces by."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Tags to filter by in JSON format, e.g. {\"http.status_code\":\"200\"}."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start time as Unix microseconds."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End time as Unix microseconds."
+              },
+              {
+                "name": "minDuration",
+                "value": "",
+                "type": "query",
+                "description": "Minimum trace duration filter, specified as a duration string (e.g. 1.2s, 100ms, 500us)."
+              },
+              {
+                "name": "maxDuration",
+                "value": "",
+                "type": "query",
+                "description": "Maximum trace duration filter, specified as a duration string (e.g. 1.2s, 100ms, 500us)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of traces to return."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "How far back to search for traces, specified as a duration string (e.g. 1h, 2d). Only used if start and end are not set."
+              }
+            ]
+          },
+          "docs": "Search for traces matching the specified query parameters. Returns a list of traces filtered by service, operation, tags, duration, and time range."
+        },
+        {
+          "info": {
+            "name": "Get a trace by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/traces/:traceID",
+            "params": [
+              {
+                "name": "traceID",
+                "value": "",
+                "type": "path",
+                "description": "The trace ID in hexadecimal format (16 or 32 hex characters)."
+              },
+              {
+                "name": "raw",
+                "value": "",
+                "type": "query",
+                "description": "Return raw trace data without post-processing."
+              },
+              {
+                "name": "prettyPrint",
+                "value": "",
+                "type": "query",
+                "description": "Pretty-print the JSON response."
+              }
+            ]
+          },
+          "docs": "Retrieve a single trace by its unique trace identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

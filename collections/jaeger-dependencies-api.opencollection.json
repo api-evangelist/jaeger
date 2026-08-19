@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jaeger Query Dependencies API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dependencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get service dependency graph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/dependencies",
+            "params": [
+              {
+                "name": "endTs",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp in Unix milliseconds."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "Duration to look back from endTs in milliseconds."
+              }
+            ]
+          },
+          "docs": "Retrieve the dependency graph showing relationships between services based on observed traces. Returns edges representing calls from one service to another with call counts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

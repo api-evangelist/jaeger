@@ -1,0 +1,204 @@
+{
+  "item": [
+    {
+      "id": "16099199-e5f9-4514-9827-eb7a522a468f",
+      "name": "Dependencies",
+      "description": {
+        "content": "Endpoints for retrieving service dependency graphs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03b41294-4ac2-45ca-b5de-4c15f93b56e8",
+          "name": "Get service dependency graph",
+          "request": {
+            "name": "Get service dependency graph",
+            "description": {
+              "content": "Retrieve the dependency graph showing relationships between services based on observed traces. Returns edges representing calls from one service to another with call counts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "dependencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "endTs",
+                  "value": "<long>",
+                  "description": "(Required) End timestamp in Unix milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "lookback",
+                  "value": "<long>",
+                  "description": "(Required) Duration to look back from endTs in milliseconds."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbeac745-ef57-4db0-a5da-57fc3c08d76f",
+              "name": "A list of service dependency links.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"parent\": \"string\",\n      \"child\": \"string\",\n      \"callCount\": 8750\n    },\n    {\n      \"parent\": \"string\",\n      \"child\": \"string\",\n      \"callCount\": 8012\n    }\n  ],\n  \"errors\": [\n    {\n      \"code\": 8970,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    },\n    {\n      \"code\": 6671,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e094d34a-208b-442f-a186-c2aabb76a9b9",
+              "name": "Invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ac84e47-76e5-444b-a7d6-bfab2519621e",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:16686",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fe3f39d0-0cca-4a32-ab74-dfc16b27c82e",
+    "name": "Jaeger Query Dependencies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Jaeger Query API provides HTTP endpoints for retrieving trace data, service information, operations, and dependency graphs from the Jaeger distributed tracing backend. This API is exposed by the jaeger-query component and is used by the Jaeger UI and other clients to search and retrieve distributed traces collected across microservices.\n\nContact Support:\n Name: Jaeger Project",
+      "type": "text/plain"
+    }
+  }
+}

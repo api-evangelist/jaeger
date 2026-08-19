@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jaeger Query Dependencies Metrics API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get latency metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/metrics/latencies",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The service name."
+              },
+              {
+                "name": "quantile",
+                "value": "",
+                "type": "query",
+                "description": "The quantile to retrieve (e.g. 0.5, 0.75, 0.95, 0.99)."
+              },
+              {
+                "name": "endTs",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp in Unix milliseconds."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "Duration to look back in milliseconds."
+              },
+              {
+                "name": "step",
+                "value": "",
+                "type": "query",
+                "description": "Step duration for bucketing in milliseconds."
+              },
+              {
+                "name": "ratePer",
+                "value": "",
+                "type": "query",
+                "description": "Rate normalization duration in milliseconds."
+              },
+              {
+                "name": "spanKind",
+                "value": "",
+                "type": "query",
+                "description": "Filter by span kind."
+              }
+            ]
+          },
+          "docs": "Retrieve latency metrics (P50, P75, P95, P99) for a service, grouped by time buckets. Requires the metrics storage backend to be configured."
+        },
+        {
+          "info": {
+            "name": "Get call rate metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/metrics/calls",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The service name."
+              },
+              {
+                "name": "endTs",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp in Unix milliseconds."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "Duration to look back in milliseconds."
+              },
+              {
+                "name": "step",
+                "value": "",
+                "type": "query",
+                "description": "Step duration for bucketing in milliseconds."
+              },
+              {
+                "name": "ratePer",
+                "value": "",
+                "type": "query",
+                "description": "Rate normalization duration in milliseconds."
+              },
+              {
+                "name": "spanKind",
+                "value": "",
+                "type": "query",
+                "description": "Filter by span kind."
+              }
+            ]
+          },
+          "docs": "Retrieve call rate metrics for a service, grouped by time buckets. Requires the metrics storage backend to be configured."
+        },
+        {
+          "info": {
+            "name": "Get error rate metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/metrics/errors",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The service name."
+              },
+              {
+                "name": "endTs",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp in Unix milliseconds."
+              },
+              {
+                "name": "lookback",
+                "value": "",
+                "type": "query",
+                "description": "Duration to look back in milliseconds."
+              },
+              {
+                "name": "step",
+                "value": "",
+                "type": "query",
+                "description": "Step duration for bucketing in milliseconds."
+              },
+              {
+                "name": "ratePer",
+                "value": "",
+                "type": "query",
+                "description": "Rate normalization duration in milliseconds."
+              },
+              {
+                "name": "spanKind",
+                "value": "",
+                "type": "query",
+                "description": "Filter by span kind."
+              }
+            ]
+          },
+          "docs": "Retrieve error rate metrics for a service, grouped by time buckets. Requires the metrics storage backend to be configured."
+        },
+        {
+          "info": {
+            "name": "Get minimum step duration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/metrics/minstep"
+          },
+          "docs": "Retrieve the minimum time resolution (step) supported by the metrics backend."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

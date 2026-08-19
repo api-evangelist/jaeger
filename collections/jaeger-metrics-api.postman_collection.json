@@ -1,0 +1,899 @@
+{
+  "item": [
+    {
+      "id": "b3dd737b-a9d4-4451-94b0-3203d0a17fb8",
+      "name": "Metrics",
+      "description": {
+        "content": "Endpoints for retrieving service performance metrics including latency, call rates, and error rates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ccd5e476-46f7-4288-a5eb-ddaf8d7ce476",
+          "name": "Get latency metrics",
+          "request": {
+            "name": "Get latency metrics",
+            "description": {
+              "content": "Retrieve latency metrics (P50, P75, P95, P99) for a service, grouped by time buckets. Requires the metrics storage backend to be configured.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "metrics",
+                "latencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "(Required) The service name."
+                },
+                {
+                  "disabled": false,
+                  "key": "quantile",
+                  "value": "<double>",
+                  "description": "(Required) The quantile to retrieve (e.g. 0.5, 0.75, 0.95, 0.99)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTs",
+                  "value": "<long>",
+                  "description": "End timestamp in Unix milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "lookback",
+                  "value": "<long>",
+                  "description": "Duration to look back in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<long>",
+                  "description": "Step duration for bucketing in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "ratePer",
+                  "value": "<long>",
+                  "description": "Rate normalization duration in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "spanKind",
+                  "value": "<string>",
+                  "description": "Filter by span kind."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b966be67-503f-4325-a84f-309359a9daa6",
+              "name": "Latency metric data points.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "latencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "quantile",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"help\": \"string\",\n  \"metrics\": [\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"1989-10-04T02:36:28.918Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 2082.2846546190376\n          }\n        },\n        {\n          \"timestamp\": \"1971-12-03T12:53:01.588Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 7706.38101266223\n          }\n        }\n      ]\n    },\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"1978-04-02T09:00:51.777Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 7133.450238828598\n          }\n        },\n        {\n          \"timestamp\": \"2001-09-07T23:17:06.351Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 675.7120082102352\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ce12f30-9cd9-4c7c-8419-21083366b383",
+              "name": "Invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "latencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "quantile",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7cdb2cc1-199f-468b-88d4-e8be8b8c9a69",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "latencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "quantile",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e96ac0d7-d343-4ccc-8170-e73a0dc9bb85",
+          "name": "Get call rate metrics",
+          "request": {
+            "name": "Get call rate metrics",
+            "description": {
+              "content": "Retrieve call rate metrics for a service, grouped by time buckets. Requires the metrics storage backend to be configured.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "metrics",
+                "calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "(Required) The service name."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTs",
+                  "value": "<long>",
+                  "description": "End timestamp in Unix milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "lookback",
+                  "value": "<long>",
+                  "description": "Duration to look back in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<long>",
+                  "description": "Step duration for bucketing in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "ratePer",
+                  "value": "<long>",
+                  "description": "Rate normalization duration in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "spanKind",
+                  "value": "<string>",
+                  "description": "Filter by span kind."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a9afe3a-527c-41c7-967c-752ab997d14d",
+              "name": "Call rate metric data points.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"help\": \"string\",\n  \"metrics\": [\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"2008-11-13T10:00:04.680Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 7058.126596385574\n          }\n        },\n        {\n          \"timestamp\": \"1965-09-26T17:10:07.861Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 5991.361667989634\n          }\n        }\n      ]\n    },\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"1991-04-15T09:14:54.510Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 6018.847989971592\n          }\n        },\n        {\n          \"timestamp\": \"1986-09-11T20:39:14.879Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 2921.5732753284105\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7171110-480e-4371-9f46-78a25d978dab",
+              "name": "Invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58f3d476-da8e-44c8-b297-0f36b7e5c875",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "972d0230-fafb-4ae5-a8bd-5bb72992f426",
+          "name": "Get error rate metrics",
+          "request": {
+            "name": "Get error rate metrics",
+            "description": {
+              "content": "Retrieve error rate metrics for a service, grouped by time buckets. Requires the metrics storage backend to be configured.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "metrics",
+                "errors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "(Required) The service name."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTs",
+                  "value": "<long>",
+                  "description": "End timestamp in Unix milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "lookback",
+                  "value": "<long>",
+                  "description": "Duration to look back in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "step",
+                  "value": "<long>",
+                  "description": "Step duration for bucketing in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "ratePer",
+                  "value": "<long>",
+                  "description": "Rate normalization duration in milliseconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "spanKind",
+                  "value": "<string>",
+                  "description": "Filter by span kind."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b81a323-6e2e-4207-b778-f687769f724e",
+              "name": "Error rate metric data points.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"help\": \"string\",\n  \"metrics\": [\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"2008-11-13T10:00:04.680Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 7058.126596385574\n          }\n        },\n        {\n          \"timestamp\": \"1965-09-26T17:10:07.861Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 5991.361667989634\n          }\n        }\n      ]\n    },\n    {\n      \"labels\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"metricPoints\": [\n        {\n          \"timestamp\": \"1991-04-15T09:14:54.510Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 6018.847989971592\n          }\n        },\n        {\n          \"timestamp\": \"1986-09-11T20:39:14.879Z\",\n          \"gaugeValue\": {\n            \"doubleValue\": 2921.5732753284105\n          }\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0ffa201-c807-4539-8ddd-58300fa7e6dd",
+              "name": "Invalid query parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "68be74e8-8b85-4f25-955c-163ed3750304",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endTs",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "lookback",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "step",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "ratePer",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04df723b-f07b-4dff-a13d-f2cb048abd0b",
+          "name": "Get minimum step duration",
+          "request": {
+            "name": "Get minimum step duration",
+            "description": {
+              "content": "Retrieve the minimum time resolution (step) supported by the metrics backend.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "metrics",
+                "minstep"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d93320f-0cae-4d61-b706-73abc2778559",
+              "name": "The minimum step duration in milliseconds.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "minstep"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "4709",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71f00237-5f3c-444c-9506-4f036242f4a9",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "metrics",
+                    "minstep"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:16686",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "39e63a48-fdbc-4221-8b22-ec1bca74a9b1",
+    "name": "Jaeger Query Dependencies Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Jaeger Query API provides HTTP endpoints for retrieving trace data, service information, operations, and dependency graphs from the Jaeger distributed tracing backend. This API is exposed by the jaeger-query component and is used by the Jaeger UI and other clients to search and retrieve distributed traces collected across microservices.\n\nContact Support:\n Name: Jaeger Project",
+      "type": "text/plain"
+    }
+  }
+}

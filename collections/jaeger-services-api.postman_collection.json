@@ -1,0 +1,328 @@
+{
+  "item": [
+    {
+      "id": "f818f720-f6b2-478c-a8fb-ad85d5da0b30",
+      "name": "Services",
+      "description": {
+        "content": "Endpoints for listing services and their operations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7204b2db-ae08-479d-b8dd-8c17e3b8bbe2",
+          "name": "Get all services",
+          "request": {
+            "name": "Get all services",
+            "description": {
+              "content": "Retrieve a list of all service names that have reported spans to the Jaeger backend.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90b8cdb4-608d-4113-8741-c98c999205f5",
+              "name": "A list of service names.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"string\",\n    \"string\"\n  ],\n  \"total\": 5322,\n  \"limit\": 7569,\n  \"offset\": 7991,\n  \"errors\": [\n    {\n      \"code\": 1869,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    },\n    {\n      \"code\": 5598,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f8f4a7c-cbb3-4448-bdaf-441f044c86dc",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "efccbd1e-5f96-4089-bc3c-fbd7d2e37ab5",
+          "name": "Get operations for a service",
+          "request": {
+            "name": "Get operations for a service",
+            "description": {
+              "content": "Retrieve a list of operation names for a given service. Operations represent the individual endpoints or functions being traced within a service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "services",
+                ":service",
+                "operations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "spanKind",
+                  "value": "<string>",
+                  "description": "Filter operations by span kind (e.g. server, client, producer, consumer)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "service",
+                  "description": "(Required) The service name."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f4ce06b-131f-4dbc-a05a-7783832653a1",
+              "name": "A list of operation names.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services",
+                    ":service",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service",
+                      "description": "(Required) The service name."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"spanKind\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"spanKind\": \"string\"\n    }\n  ],\n  \"total\": 4668,\n  \"limit\": 5952,\n  \"offset\": 2212,\n  \"errors\": [\n    {\n      \"code\": 3905,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    },\n    {\n      \"code\": 1313,\n      \"msg\": \"string\",\n      \"traceID\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98c7c947-aba7-4bf8-896e-4e237d016579",
+              "name": "Service not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services",
+                    ":service",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service",
+                      "description": "(Required) The service name."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e11ef558-3648-4729-91d4-ce08ee95d60d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "services",
+                    ":service",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "spanKind",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service",
+                      "description": "(Required) The service name."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:16686",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "92d09f82-f316-4bfb-9cef-f98f43168d30",
+    "name": "Jaeger Query Dependencies Services API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Jaeger Query API provides HTTP endpoints for retrieving trace data, service information, operations, and dependency graphs from the Jaeger distributed tracing backend. This API is exposed by the jaeger-query component and is used by the Jaeger UI and other clients to search and retrieve distributed traces collected across microservices.\n\nContact Support:\n Name: Jaeger Project",
+      "type": "text/plain"
+    }
+  }
+}

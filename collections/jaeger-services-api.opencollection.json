@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jaeger Query Dependencies Services API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/services"
+          },
+          "docs": "Retrieve a list of all service names that have reported spans to the Jaeger backend."
+        },
+        {
+          "info": {
+            "name": "Get operations for a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:16686/api/services/:service/operations",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "path",
+                "description": "The service name."
+              },
+              {
+                "name": "spanKind",
+                "value": "",
+                "type": "query",
+                "description": "Filter operations by span kind (e.g. server, client, producer, consumer)."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of operation names for a given service. Operations represent the individual endpoints or functions being traced within a service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
