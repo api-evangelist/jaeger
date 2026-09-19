@@ -50,6 +50,11 @@ apis:
     Thrift over UDP and HTTP formats.
   humanURL: https://www.jaegertracing.io/docs/latest/apis/
   tags:
+  - Collectors
+  - Distributed Tracing
+  - gRPC
+  - OTLP
+  tags_raw:
   - Collector
   - Distributed Tracing
   - gRPC
