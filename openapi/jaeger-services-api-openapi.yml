@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Jaeger Query Dependencies Services API
+  title: Jaeger Query Services API
   description: The Jaeger Query API provides HTTP endpoints for retrieving trace data, service information, operations, and dependency graphs from the Jaeger distributed tracing backend. This API is exposed by the jaeger-query component and is used by the Jaeger UI and other clients to search and retrieve distributed traces collected across microservices.
   version: 1.0.0
   contact:

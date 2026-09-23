@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Jaeger Query Dependencies Traces API
+  title: Jaeger Query Traces API
   description: The Jaeger Query API provides HTTP endpoints for retrieving trace data, service information, operations, and dependency graphs from the Jaeger distributed tracing backend. This API is exposed by the jaeger-query component and is used by the Jaeger UI and other clients to search and retrieve distributed traces collected across microservices.
   version: 1.0.0
   contact:
@@ -150,44 +150,20 @@ paths:
           description: Internal server error.
 components:
   schemas:
-    SpanLog:
+    Process:
       type: object
-      description: A time-stamped log entry within a span.
+      description: A process represents the service instance that produced spans.
       properties:
-        timestamp:
-          type: integer
-          format: int64
-          description: Timestamp of the log entry in Unix microseconds.
-        fields:
+        serviceName:
+          type: string
+          description: The name of the service.
+        tags:
           type: array
-          description: Key-value pairs representing the log data.
+          description: Additional metadata about the process.
           items:
             $ref: '#/components/schemas/KeyValue'
       required:
-      - timestamp
-      - fields
-    KeyValue:
-      type: object
-      description: A typed key-value pair used for span tags and log fields.
-      properties:
-        key:
-          type: string
-          description: The key name.
-        type:
-          type: string
-          description: The value type.
-          enum:
-          - string
-          - bool
-          - int64
-          - float64
-          - binary
-        value:
-          description: The value, type depends on the type field.
-      required:
-      - key
-      - type
-      - value
+      - serviceName
     Span:
       type: object
       description: A span represents a single unit of work within a trace. Spans have a start time, duration, and contain metadata about the operation being performed.
@@ -241,20 +217,57 @@ components:
       - operationName
       - startTime
       - duration
-    Process:
+    SpanLog:
       type: object
-      description: A process represents the service instance that produced spans.
+      description: A time-stamped log entry within a span.
       properties:
-        serviceName:
-          type: string
-          description: The name of the service.
-        tags:
+        timestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the log entry in Unix microseconds.
+        fields:
           type: array
-          description: Additional metadata about the process.
+          description: Key-value pairs representing the log data.
           items:
             $ref: '#/components/schemas/KeyValue'
       required:
-      - serviceName
+      - timestamp
+      - fields
+    KeyValue:
+      type: object
+      description: A typed key-value pair used for span tags and log fields.
+      properties:
+        key:
+          type: string
+          description: The key name.
+        type:
+          type: string
+          description: The value type.
+          enum:
+          - string
+          - bool
+          - int64
+          - float64
+          - binary
+        value:
+          description: The value, type depends on the type field.
+      required:
+      - key
+      - type
+      - value
+    StructuredError:
+      type: object
+      description: A structured error returned by the API.
+      properties:
+        code:
+          type: integer
+          description: Error code.
+        msg:
+          type: string
+          description: Error message.
+        traceID:
+          type: string
+          description: Trace ID associated with the error, if applicable.
     SpanReference:
       type: object
       description: A reference from one span to another, establishing causal relationships within a trace.
@@ -301,16 +314,3 @@ components:
       - traceID
       - spans
       - processes
-    StructuredError:
-      type: object
-      description: A structured error returned by the API.
-      properties:
-        code:
-          type: integer
-          description: Error code.
-        msg:
-          type: string
-          description: Error message.
-        traceID:
-          type: string
-          description: Trace ID associated with the error, if applicable.

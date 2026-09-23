@@ -1,10 +1,7 @@
 {
   "provider": "jaeger",
   "sources": [
-    "jaeger-dependencies-api-openapi.yml",
-    "jaeger-metrics-api-openapi.yml",
-    "jaeger-services-api-openapi.yml",
-    "jaeger-traces-api-openapi.yml"
+    "_original/jaeger-query-api.yml"
   ],
   "outputs": [
     "jaeger-dependencies-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "jaeger-query-api.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "jaeger-dependencies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaeger-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaeger-services-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jaeger-traces-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
