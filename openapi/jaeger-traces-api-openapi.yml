@@ -150,6 +150,70 @@ paths:
           description: Internal server error.
 components:
   schemas:
+    Trace:
+      type: object
+      description: A trace represents the complete journey of a request through a distributed system. It consists of one or more spans forming a directed acyclic graph.
+      properties:
+        traceID:
+          type: string
+          description: Unique trace identifier in hexadecimal format (16 or 32 hex characters).
+        spans:
+          type: array
+          description: The spans that make up this trace.
+          items:
+            $ref: '#/components/schemas/Span'
+        processes:
+          type: object
+          description: Map of process IDs to process objects. Processes represent the services that produced spans in this trace.
+          additionalProperties:
+            $ref: '#/components/schemas/Process'
+        warnings:
+          type: array
+          description: Warnings generated during trace retrieval.
+          items:
+            type: string
+      required:
+      - traceID
+      - spans
+      - processes
+    KeyValue:
+      type: object
+      description: A typed key-value pair used for span tags and log fields.
+      properties:
+        key:
+          type: string
+          description: The key name.
+        type:
+          type: string
+          description: The value type.
+          enum:
+          - string
+          - bool
+          - int64
+          - float64
+          - binary
+        value:
+          description: The value, type depends on the type field.
+      required:
+      - key
+      - type
+      - value
+    SpanLog:
+      type: object
+      description: A time-stamped log entry within a span.
+      properties:
+        timestamp:
+          type: integer
+          format: int64
+          description: Timestamp of the log entry in Unix microseconds.
+        fields:
+          type: array
+          description: Key-value pairs representing the log data.
+          items:
+            $ref: '#/components/schemas/KeyValue'
+      required:
+      - timestamp
+      - fields
     Process:
       type: object
       description: A process represents the service instance that produced spans.
@@ -164,6 +228,19 @@ components:
             $ref: '#/components/schemas/KeyValue'
       required:
       - serviceName
+    StructuredError:
+      type: object
+      description: A structured error returned by the API.
+      properties:
+        code:
+          type: integer
+          description: Error code.
+        msg:
+          type: string
+          description: Error message.
+        traceID:
+          type: string
+          description: Trace ID associated with the error, if applicable.
     Span:
       type: object
       description: A span represents a single unit of work within a trace. Spans have a start time, duration, and contain metadata about the operation being performed.
@@ -217,57 +294,6 @@ components:
       - operationName
       - startTime
       - duration
-    SpanLog:
-      type: object
-      description: A time-stamped log entry within a span.
-      properties:
-        timestamp:
-          type: integer
-          format: int64
-          description: Timestamp of the log entry in Unix microseconds.
-        fields:
-          type: array
-          description: Key-value pairs representing the log data.
-          items:
-            $ref: '#/components/schemas/KeyValue'
-      required:
-      - timestamp
-      - fields
-    KeyValue:
-      type: object
-      description: A typed key-value pair used for span tags and log fields.
-      properties:
-        key:
-          type: string
-          description: The key name.
-        type:
-          type: string
-          description: The value type.
-          enum:
-          - string
-          - bool
-          - int64
-          - float64
-          - binary
-        value:
-          description: The value, type depends on the type field.
-      required:
-      - key
-      - type
-      - value
-    StructuredError:
-      type: object
-      description: A structured error returned by the API.
-      properties:
-        code:
-          type: integer
-          description: Error code.
-        msg:
-          type: string
-          description: Error message.
-        traceID:
-          type: string
-          description: Trace ID associated with the error, if applicable.
     SpanReference:
       type: object
       description: A reference from one span to another, establishing causal relationships within a trace.
@@ -288,29 +314,3 @@ components:
       - refType
       - traceID
       - spanID
-    Trace:
-      type: object
-      description: A trace represents the complete journey of a request through a distributed system. It consists of one or more spans forming a directed acyclic graph.
-      properties:
-        traceID:
-          type: string
-          description: Unique trace identifier in hexadecimal format (16 or 32 hex characters).
-        spans:
-          type: array
-          description: The spans that make up this trace.
-          items:
-            $ref: '#/components/schemas/Span'
-        processes:
-          type: object
-          description: Map of process IDs to process objects. Processes represent the services that produced spans in this trace.
-          additionalProperties:
-            $ref: '#/components/schemas/Process'
-        warnings:
-          type: array
-          description: Warnings generated during trace retrieval.
-          items:
-            type: string
-      required:
-      - traceID
-      - spans
-      - processes
