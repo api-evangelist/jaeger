@@ -176,28 +176,6 @@ components:
       - traceID
       - spans
       - processes
-    KeyValue:
-      type: object
-      description: A typed key-value pair used for span tags and log fields.
-      properties:
-        key:
-          type: string
-          description: The key name.
-        type:
-          type: string
-          description: The value type.
-          enum:
-          - string
-          - bool
-          - int64
-          - float64
-          - binary
-        value:
-          description: The value, type depends on the type field.
-      required:
-      - key
-      - type
-      - value
     SpanLog:
       type: object
       description: A time-stamped log entry within a span.
@@ -241,6 +219,48 @@ components:
         traceID:
           type: string
           description: Trace ID associated with the error, if applicable.
+    KeyValue:
+      type: object
+      description: A typed key-value pair used for span tags and log fields.
+      properties:
+        key:
+          type: string
+          description: The key name.
+        type:
+          type: string
+          description: The value type.
+          enum:
+          - string
+          - bool
+          - int64
+          - float64
+          - binary
+        value:
+          description: The value, type depends on the type field.
+      required:
+      - key
+      - type
+      - value
+    SpanReference:
+      type: object
+      description: A reference from one span to another, establishing causal relationships within a trace.
+      properties:
+        refType:
+          type: string
+          description: The type of reference.
+          enum:
+          - CHILD_OF
+          - FOLLOWS_FROM
+        traceID:
+          type: string
+          description: The trace ID of the referenced span.
+        spanID:
+          type: string
+          description: The span ID of the referenced span.
+      required:
+      - refType
+      - traceID
+      - spanID
     Span:
       type: object
       description: A span represents a single unit of work within a trace. Spans have a start time, duration, and contain metadata about the operation being performed.
@@ -294,23 +314,3 @@ components:
       - operationName
       - startTime
       - duration
-    SpanReference:
-      type: object
-      description: A reference from one span to another, establishing causal relationships within a trace.
-      properties:
-        refType:
-          type: string
-          description: The type of reference.
-          enum:
-          - CHILD_OF
-          - FOLLOWS_FROM
-        traceID:
-          type: string
-          description: The trace ID of the referenced span.
-        spanID:
-          type: string
-          description: The span ID of the referenced span.
-      required:
-      - refType
-      - traceID
-      - spanID
