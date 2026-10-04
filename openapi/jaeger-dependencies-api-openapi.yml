@@ -60,19 +60,6 @@ paths:
           description: Internal server error.
 components:
   schemas:
-    StructuredError:
-      type: object
-      description: A structured error returned by the API.
-      properties:
-        code:
-          type: integer
-          description: Error code.
-        msg:
-          type: string
-          description: Error message.
-        traceID:
-          type: string
-          description: Trace ID associated with the error, if applicable.
     DependencyLink:
       type: object
       description: A dependency link represents an observed call relationship between two services within the traced system.
@@ -91,3 +78,16 @@ components:
       - parent
       - child
       - callCount
+    StructuredError:
+      type: object
+      description: A structured error returned by the API.
+      properties:
+        code:
+          type: integer
+          description: Error code.
+        msg:
+          type: string
+          description: Error message.
+        traceID:
+          type: string
+          description: Trace ID associated with the error, if applicable.
