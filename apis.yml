@@ -166,6 +166,9 @@ apis:
   - type: ChangeLog
     url: https://github.com/jaegertracing/jaeger/blob/main/CHANGELOG.md
 common:
+  - type: CapabilityMap
+    url: capabilities/jaeger-capability-edges.yml
+    name: Jaeger Business Capability Map
   - type: IssueTracker
     url: https://github.com/jaegertracing/jaeger/issues
   - type: Releases

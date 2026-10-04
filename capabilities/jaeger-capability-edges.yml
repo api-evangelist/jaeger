@@ -1,0 +1,55 @@
+slug: jaeger
+provider: Jaeger
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Metrics
+  spec_file: jaeger-metrics-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.9
+  evidence: GET /api/metrics/latencies Get latency metrics; GET /api/metrics/errors Get error rate metrics
+  reason: Latency, call-rate and error-rate metrics derived from traces for monitoring microservices.
+    This is squarely 'Logs, metrics, traces ... that make the running service understandable in production'.
+- tag: Traces
+  spec_file: jaeger-traces-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.9
+  evidence: '"GET /api/traces searchTraces Search traces"; "retrieving trace data, service information,
+    operations, and dependency graphs from the Jaeger distributed tracing backend"'
+  reason: Distributed trace retrieval for monitoring running microservices is squarely observability tooling
+    (logs, metrics, traces), not any business-domain tracing.
+- tag: Dependencies
+  spec_file: jaeger-dependencies-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.82
+  evidence: 'GET /api/dependencies getDependencies Get service dependency graph; schemas: DependencyLink'
+  reason: Jaeger is a distributed tracing backend; this endpoint derives a service dependency graph from
+    collected traces, which is part of making the running service understandable in production — Observability
+    Management.
+- tag: Services
+  spec_file: jaeger-services-api-openapi.yml
+  capability_id: BC-4220.20
+  capability_id_l1: BC-4220
+  capability_name: Observability Management
+  confidence: 0.78
+  evidence: GET /api/services getServices Get all services; GET /api/services/{service}/operations Get
+    operations for a service
+  reason: Lists the services and operations known to the tracing backend, used by the Jaeger UI to search
+    traces. Observability metadata rather than a service catalogue in the ITSM sense, so Observability
+    Management with moderate confidence.
