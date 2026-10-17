@@ -203,20 +203,6 @@ components:
       - operationName
       - startTime
       - duration
-    Process:
-      type: object
-      description: A process represents the service instance that produced spans.
-      properties:
-        serviceName:
-          type: string
-          description: The name of the service.
-        tags:
-          type: array
-          description: Additional metadata about the process.
-          items:
-            $ref: '#/components/schemas/KeyValue'
-      required:
-      - serviceName
     StructuredError:
       type: object
       description: A structured error returned by the API.
@@ -230,28 +216,26 @@ components:
         traceID:
           type: string
           description: Trace ID associated with the error, if applicable.
-    KeyValue:
+    SpanReference:
       type: object
-      description: A typed key-value pair used for span tags and log fields.
+      description: A reference from one span to another, establishing causal relationships within a trace.
       properties:
-        key:
+        refType:
           type: string
-          description: The key name.
-        type:
-          type: string
-          description: The value type.
+          description: The type of reference.
           enum:
-          - string
-          - bool
-          - int64
-          - float64
-          - binary
-        value:
-          description: The value, type depends on the type field.
+          - CHILD_OF
+          - FOLLOWS_FROM
+        traceID:
+          type: string
+          description: The trace ID of the referenced span.
+        spanID:
+          type: string
+          description: The span ID of the referenced span.
       required:
-      - key
-      - type
-      - value
+      - refType
+      - traceID
+      - spanID
     Trace:
       type: object
       description: A trace represents the complete journey of a request through a distributed system. It consists of one or more spans forming a directed acyclic graph.
@@ -278,26 +262,6 @@ components:
       - traceID
       - spans
       - processes
-    SpanReference:
-      type: object
-      description: A reference from one span to another, establishing causal relationships within a trace.
-      properties:
-        refType:
-          type: string
-          description: The type of reference.
-          enum:
-          - CHILD_OF
-          - FOLLOWS_FROM
-        traceID:
-          type: string
-          description: The trace ID of the referenced span.
-        spanID:
-          type: string
-          description: The span ID of the referenced span.
-      required:
-      - refType
-      - traceID
-      - spanID
     SpanLog:
       type: object
       description: A time-stamped log entry within a span.
@@ -314,3 +278,39 @@ components:
       required:
       - timestamp
       - fields
+    Process:
+      type: object
+      description: A process represents the service instance that produced spans.
+      properties:
+        serviceName:
+          type: string
+          description: The name of the service.
+        tags:
+          type: array
+          description: Additional metadata about the process.
+          items:
+            $ref: '#/components/schemas/KeyValue'
+      required:
+      - serviceName
+    KeyValue:
+      type: object
+      description: A typed key-value pair used for span tags and log fields.
+      properties:
+        key:
+          type: string
+          description: The key name.
+        type:
+          type: string
+          description: The value type.
+          enum:
+          - string
+          - bool
+          - int64
+          - float64
+          - binary
+        value:
+          description: The value, type depends on the type field.
+      required:
+      - key
+      - type
+      - value
