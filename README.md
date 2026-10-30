@@ -1,4 +1,4 @@
-# Jaeger (jaeger)
+# Jaeger
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,126 +66,133 @@
 
 Jaeger is an open source, end-to-end distributed tracing system for monitoring and troubleshooting microservices-based architectures. Jaeger provides visibility into distributed system behavior through trace collection, storage, and visualization.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/jaeger/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/jaeger/refs/heads/main/apis.yml)
+**Areas:** Distributed Tracing · Microservices · Monitoring · Observability
 
-## Scope
+## Jaeger on APIs.io
 
-- **Type:** Index
+Everything profiled for Jaeger is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/jaeger/](https://apis.io/providers/jaeger/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Distributed Tracing
-- Microservices
-- Monitoring
-- Observability
+- [Jaeger Collector API](https://apis.io/apis/jaeger/jaeger-collector-api/) — The Jaeger Collector API receives trace spans from instrumented applications and SDKs. Since Jaeger v1.11 the primary protocol is the…
+- [Jaeger Remote Storage API](https://apis.io/apis/jaeger/jaeger-remote-storage-api/) — The Jaeger Remote Storage API is a gRPC-based interface that allows extending Jaeger with custom storage backends. Any backend implementing this API can be…
+- [Jaeger Remote Sampling API](https://apis.io/apis/jaeger/jaeger-remote-sampling-api/) — The Jaeger Remote Sampling API provides HTTP and gRPC endpoints that SDKs use to retrieve sampling strategies for distributed trace collection. It is…
+- [Jaeger Dependencies API](https://apis.io/apis/jaeger/jaeger-dependencies-api/) — Endpoints for retrieving service dependency graphs.
+- [Jaeger Metrics API](https://apis.io/apis/jaeger/jaeger-metrics-api/) — Endpoints for retrieving service performance metrics including latency, call rates, and error rates.
+- [Jaeger Services API](https://apis.io/apis/jaeger/jaeger-services-api/) — Endpoints for listing services and their operations.
+- [Jaeger Traces API](https://apis.io/apis/jaeger/jaeger-traces-api/) — Endpoints for searching and retrieving distributed traces.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-01-01
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Jaeger Query API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Jaeger Query API is an HTTP/JSON API exposed by the Jaeger Query service for retrieving distributed traces, listing services and operations, querying service dependency graphs, and accessing performance metrics including latency, call rates, and error rates. A gRPC version of the Query API is also available defined in the jaeger-idl query.proto IDL.
+- [Jaeger Agentic Access](https://apis.io/agentic-access/jaeger/jaeger-agentic-access/)
 
-- **Human URL:** [https://www.jaegertracing.io/docs/latest/apis/](https://www.jaegertracing.io/docs/latest/apis/)
+#### Collections (5)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Distributed Tracing
-- Observability
-- Query
-- Traces
+- [Jaeger Query Dependencies API](https://apis.io/collections/jaeger/open-jaeger-dependencies-api/)
+- [Jaeger Query Dependencies Metrics API](https://apis.io/collections/jaeger/open-jaeger-metrics-api/)
+- [Jaeger Query API](https://apis.io/collections/jaeger/open-jaeger-query-api/)
+- [Jaeger Query Dependencies Services API](https://apis.io/collections/jaeger/open-jaeger-services-api/)
+- [Jaeger Query Dependencies Traces API](https://apis.io/collections/jaeger/open-jaeger-traces-api/)
 
-#### Properties
+#### Governance rules (1)
 
-- [Documentation](https://www.jaegertracing.io/docs/latest/apis/)
-- [OpenAPI](openapi/jaeger-query-api.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/jaeger-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jaeger-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub Repository](https://github.com/jaegertracing/jaeger)
-- [Changelog](https://github.com/jaegertracing/jaeger/blob/main/CHANGELOG.md)
+Spectral rulesets for the provider's contracts.
 
-### Jaeger Collector API
+- [Jaeger — jsonschema rules](https://apis.io/rules/jaeger/jaeger-jsonschema-spectral-rules/)
 
-The Jaeger Collector API receives trace spans from instrumented applications and SDKs. Since Jaeger v1.11 the primary protocol is the jaeger.api_v2.CollectorService gRPC endpoint; the collector also accepts OTLP traces (binary gRPC, Protobuf over HTTP, JSON over HTTP) since v1.35, as well as legacy Thrift over UDP and HTTP formats.
+#### Security (1)
 
-- **Human URL:** [https://www.jaegertracing.io/docs/latest/apis/](https://www.jaegertracing.io/docs/latest/apis/)
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags
+- [Jaeger Domain Security](https://apis.io/security/jaeger/jaeger-domain-security/)
 
-- Collector
-- Distributed Tracing
-- gRPC
-- OTLP
+#### Plans and pricing (1)
 
-#### Properties
+Published plans, tiers and prices.
 
-- [Documentation](https://www.jaegertracing.io/docs/latest/apis/)
-- [Reference](https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/collector.proto)
-- [GitHub Repository](https://github.com/jaegertracing/jaeger)
-- [Postman Collection](collections/jaeger-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jaeger-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Jaeger Plans Pricing](https://apis.io/plans/jaeger/jaeger-plans-pricing/)
 
-### Jaeger Remote Storage API
+#### Rate limits (1)
 
-The Jaeger Remote Storage API is a gRPC-based interface that allows extending Jaeger with custom storage backends. Any backend implementing this API can be deployed as a remote gRPC server and plugged into Jaeger components in place of built-in storage engines (available since v1.30).
+Published request limits.
 
-- **Human URL:** [https://www.jaegertracing.io/docs/latest/apis/](https://www.jaegertracing.io/docs/latest/apis/)
+- [Jaeger Rate Limits](https://apis.io/rate-limits/jaeger/jaeger-rate-limits/)
 
-#### Tags
+#### FinOps (1)
 
-- Distributed Tracing
-- Extensions
-- gRPC
-- Storage
+What the API costs to run, by operation.
 
-#### Properties
+- [Jaeger Finops](https://apis.io/finops/jaeger/jaeger-finops/)
 
-- [Documentation](https://www.jaegertracing.io/docs/latest/apis/)
-- [Reference](https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/query.proto)
-- [GitHub Repository](https://github.com/jaegertracing/jaeger)
-- [Postman Collection](collections/jaeger-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jaeger-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+## Where to find this API
 
-### Jaeger Remote Sampling API
-
-The Jaeger Remote Sampling API provides HTTP and gRPC endpoints that SDKs use to retrieve sampling strategies for distributed trace collection. It is implemented by the jaeger-collector and defined in the sampling.proto IDL, supporting both static file-based and adaptive sampling strategies.
-
-- **Human URL:** [https://www.jaegertracing.io/docs/latest/apis/](https://www.jaegertracing.io/docs/latest/apis/)
-
-#### Tags
-
-- Configuration
-- Distributed Tracing
-- gRPC
-- Sampling
-
-#### Properties
-
-- [Documentation](https://www.jaegertracing.io/docs/latest/apis/)
-- [Reference](https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto)
-- [GitHub Repository](https://github.com/jaegertracing/jaeger)
-- [Postman Collection](collections/jaeger-query-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/jaeger-query-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.jaegertracing.io/)
 - [Documentation](https://www.jaegertracing.io/docs/)
-- [Getting Started](https://www.jaegertracing.io/docs/latest/getting-started/)
-- [GitHub Organization](https://github.com/jaegertracing)
-- [GitHub Repository](https://github.com/jaegertracing/jaeger)
-- [Blog](https://www.jaegertracing.io/news/)
-- [Community](https://www.jaegertracing.io/get-involved/)
+- [Getting started](https://www.jaegertracing.io/docs/latest/getting-started/)
 - [Support](https://www.jaegertracing.io/get-in-touch/)
 - [Changelog](https://github.com/jaegertracing/jaeger/blob/main/CHANGELOG.md)
-- [JSON-LD](json-ld/jaeger-trace.yml) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/jaeger-trace.yml) — [JSON Schema](https://json-schema.org/specification)
+- [Blog](https://www.jaegertracing.io/news/)
+- [GitHub](https://github.com/jaegertracing)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 35.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 41.5 |
+| Contract governance | 9.8 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/jaeger/](https://apis.io/providers/jaeger/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Jaeger: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/jaeger/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
